@@ -1,0 +1,20 @@
+
+User --
+
+(Lift from facebook profile):
+first name, last name, profile image
+Non-facebook data:
+email address (@schoolextention.edu)
+phone number
+
+Messaging --
+
+you're the wizard
+
+Listings --
+
+ID#, school, ownerID, isAvailable, itemName, price, bids (count), description, image(s)
+
+Bids --
+
+corresponding listingID, bidding Price, bidder, isAccepted, ownerID
