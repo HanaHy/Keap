@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="itemGridCell" id="gTV-IL-0wX" customClass="ItemCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="190" height="190"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="190" height="190"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iOSWelcomeScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="nXa-QC-lxL">
+                        <rect key="frame" x="0.0" y="0.0" width="190" height="190"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.89999999999999991" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$&lt;&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8si-x4-lOC">
+                        <rect key="frame" x="8" y="135" width="57" height="55"/>
+                        <color key="backgroundColor" red="0.74901960779999999" green="0.81176470590000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="57" id="WtB-lC-RcF"/>
+                            <constraint firstAttribute="height" constant="55" id="iFQ-bM-OWe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="highlightedColor" red="0.74901960779999999" green="0.81176470590000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="nXa-QC-lxL" secondAttribute="bottom" id="7uB-JS-iAd"/>
+                <constraint firstItem="8si-x4-lOC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" id="A4r-6U-3fn"/>
+                <constraint firstItem="nXa-QC-lxL" firstAttribute="bottom" secondItem="8si-x4-lOC" secondAttribute="bottom" id="Wq2-O5-oab"/>
+                <constraint firstItem="nXa-QC-lxL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="o4k-02-obg"/>
+                <constraint firstItem="nXa-QC-lxL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rXc-lS-GHw"/>
+                <constraint firstAttribute="trailing" secondItem="nXa-QC-lxL" secondAttribute="trailing" id="tOk-5h-qaF"/>
+            </constraints>
+            <size key="customSize" width="190" height="190"/>
+            <connections>
+                <outlet property="img" destination="nXa-QC-lxL" id="dFd-s2-LDd"/>
+                <outlet property="price" destination="8si-x4-lOC" id="3tG-Tf-URl"/>
+            </connections>
+            <point key="canvasLocation" x="544" y="486"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="iOSWelcomeScreen.png" width="900" height="1600"/>
+    </resources>
+</document>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="BidTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="377" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="377" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="temp1.png" translatesAutoresizingMaskIntoConstraints="NO" id="pmb-3E-IG3">
+                        <rect key="frame" x="8" y="6" width="30" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="NHC-tk-Dn1"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&lt;First Last&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrl-SV-Dl9">
+                        <rect key="frame" x="46" y="11" width="92" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="92" id="eqH-SL-thq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$&lt;&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qC-iY-rMp">
+                        <rect key="frame" x="159" y="11" width="31" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="31" id="4Nz-4c-obY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.68142361110000005" green="0.68142361110000005" blue="0.68142361110000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gj4-5g-gUW">
+                        <rect key="frame" x="308" y="9" width="25" height="25"/>
+                        <state key="normal" image="medium_grey_reject.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="rejectBidButtonTouchHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nxQ-g6-Ni2"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jvb-ww-j0g">
+                        <rect key="frame" x="344" y="9" width="25" height="25"/>
+                        <state key="normal" image="light_green_checkmark.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="acceptBidButtonTouchHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="q8G-SF-0Rj"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="pmb-3E-IG3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-7" id="0t2-AL-29j"/>
+                    <constraint firstItem="9qC-iY-rMp" firstAttribute="baseline" secondItem="mrl-SV-Dl9" secondAttribute="baseline" id="1fW-VU-9BM"/>
+                    <constraint firstItem="pmb-3E-IG3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="5BX-YH-8rr"/>
+                    <constraint firstItem="mrl-SV-Dl9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7vY-3P-bJJ"/>
+                    <constraint firstItem="mrl-SV-Dl9" firstAttribute="leading" secondItem="pmb-3E-IG3" secondAttribute="trailing" constant="8" symbolic="YES" id="85x-4m-Nde"/>
+                    <constraint firstItem="Gj4-5g-gUW" firstAttribute="top" secondItem="Jvb-ww-j0g" secondAttribute="top" id="8UN-Mb-ekR"/>
+                    <constraint firstItem="Jvb-ww-j0g" firstAttribute="leading" secondItem="Gj4-5g-gUW" secondAttribute="trailing" constant="11" id="BUB-f1-bbU"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Jvb-ww-j0g" secondAttribute="trailing" constant="-7" id="IMB-KB-yU4"/>
+                    <constraint firstItem="mrl-SV-Dl9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="Suu-GI-gge"/>
+                    <constraint firstItem="9qC-iY-rMp" firstAttribute="centerY" secondItem="Gj4-5g-gUW" secondAttribute="centerY" id="ZLs-b4-JIP"/>
+                    <constraint firstItem="mrl-SV-Dl9" firstAttribute="firstBaseline" secondItem="9qC-iY-rMp" secondAttribute="firstBaseline" id="eqd-I6-Kgz"/>
+                    <constraint firstItem="mrl-SV-Dl9" firstAttribute="centerY" secondItem="pmb-3E-IG3" secondAttribute="centerY" id="h1D-ql-15k"/>
+                    <constraint firstItem="9qC-iY-rMp" firstAttribute="leading" secondItem="mrl-SV-Dl9" secondAttribute="trailing" constant="21" id="yL0-h5-cJe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bidAccept" destination="Jvb-ww-j0g" id="sCp-7m-ft9"/>
+                <outlet property="bidAmount" destination="9qC-iY-rMp" id="o9H-7P-QSd"/>
+                <outlet property="bidReject" destination="Gj4-5g-gUW" id="Q4a-nj-wPZ"/>
+                <outlet property="userImage" destination="pmb-3E-IG3" id="ndZ-NW-YZe"/>
+                <outlet property="userName" destination="mrl-SV-Dl9" id="uVm-Up-x3s"/>
+            </connections>
+            <point key="canvasLocation" x="320.5" y="377"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="light_green_checkmark.png" width="25" height="25"/>
+        <image name="medium_grey_reject.png" width="25" height="25"/>
+        <image name="temp1.png" width="200" height="200"/>
+    </resources>
+</document>

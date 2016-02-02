@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="priceCell" rowHeight="144" id="KGk-i7-Jjw" customClass="PricePickTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="377" height="144"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="377" height="143.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Starting Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rT-TI-JN7">
+                        <rect key="frame" x="25" y="21" width="132" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="132" id="8M2-d9-jmc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="___" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JHo-0V-aA9">
+                        <rect key="frame" x="108" y="42" width="160" height="59"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="52"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvw-d5-Mnr">
+                        <rect key="frame" x="50" y="52" width="50" height="46"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="JHo-0V-aA9" firstAttribute="top" secondItem="6rT-TI-JN7" secondAttribute="bottom" id="3hD-5E-igd"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="JHo-0V-aA9" secondAttribute="bottom" constant="34.5" id="KCY-hZ-M5O"/>
+                    <constraint firstItem="JHo-0V-aA9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="MX7-KE-5CY"/>
+                    <constraint firstItem="JHo-0V-aA9" firstAttribute="leading" secondItem="gvw-d5-Mnr" secondAttribute="trailing" constant="8" symbolic="YES" id="RUw-qs-kdT"/>
+                    <constraint firstItem="JHo-0V-aA9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UA1-cJ-u7B"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="JHo-0V-aA9" secondAttribute="trailing" constant="94" id="e7f-1y-DJB"/>
+                    <constraint firstItem="6rT-TI-JN7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="13" id="jMB-Gk-jbP"/>
+                    <constraint firstItem="gvw-d5-Mnr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="35" id="kDa-nQ-T2M"/>
+                    <constraint firstItem="6rT-TI-JN7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="kjf-GK-JZU"/>
+                    <constraint firstItem="JHo-0V-aA9" firstAttribute="baseline" secondItem="gvw-d5-Mnr" secondAttribute="baseline" id="yQl-ei-B01"/>
+                    <constraint firstItem="gvw-d5-Mnr" firstAttribute="top" secondItem="6rT-TI-JN7" secondAttribute="bottom" constant="10" id="za9-BG-ADc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="itemPrice" destination="JHo-0V-aA9" id="3vO-gd-o33"/>
+            </connections>
+            <point key="canvasLocation" x="372.5" y="439"/>
+        </tableViewCell>
+    </objects>
+</document>

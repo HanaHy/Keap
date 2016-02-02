@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="64" id="KGk-i7-Jjw" customClass="SBarTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="426" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="426" height="63.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="djn-fs-kRJ">
+                        <rect key="frame" x="0.0" y="10" width="426" height="44"/>
+                        <color key="backgroundColor" red="1" green="0.75686274509999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="0.75686274509999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </searchBar>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="djn-fs-kRJ" secondAttribute="trailing" id="EYH-Bp-YBm"/>
+                    <constraint firstItem="djn-fs-kRJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TGQ-Ki-yUp"/>
+                    <constraint firstItem="djn-fs-kRJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="eB8-LC-RFJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="0.75686274509999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="searchBar" destination="djn-fs-kRJ" id="8l4-jo-TQY"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

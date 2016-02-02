@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="267" id="KGk-i7-Jjw" customClass="ListBidTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="267"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="266.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="temp1.png" translatesAutoresizingMaskIntoConstraints="NO" id="uve-ip-80l">
+                        <rect key="frame" x="109" y="8" width="103" height="103"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Item Name&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIH-xh-Wia">
+                        <rect key="frame" x="0.0" y="123" width="320" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="T6M-yV-euX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$&lt;&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iik-Su-4Ca">
+                        <rect key="frame" x="0.0" y="152" width="320" height="49"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="43"/>
+                        <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QjE-tN-9tk">
+                        <rect key="frame" x="142" y="209" width="37" height="30"/>
+                        <state key="normal" title="SELL">
+                            <color key="titleColor" red="0.58823529409999997" green="0.88235294119999996" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="acceptButtonTouchHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="uHg-yl-6rx"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqu-qq-oui">
+                        <rect key="frame" x="239" y="209" width="33" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="33" id="oe9-xF-dbZ"/>
+                        </constraints>
+                        <state key="normal" title="EDIT">
+                            <color key="titleColor" red="0.30588235289999999" green="0.70980392160000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vc4-3Y-FFa">
+                        <rect key="frame" x="31" y="209" width="64" height="30"/>
+                        <state key="normal" title="REMOVE">
+                            <color key="titleColor" white="0.81000000000000005" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="rejectButtonTouchHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="87o-3d-6hd"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="uve-ip-80l" firstAttribute="centerX" secondItem="gIH-xh-Wia" secondAttribute="centerX" id="3lO-ML-Ggr"/>
+                    <constraint firstItem="Iik-Su-4Ca" firstAttribute="centerX" secondItem="QjE-tN-9tk" secondAttribute="centerX" id="5K1-0V-zws"/>
+                    <constraint firstItem="QjE-tN-9tk" firstAttribute="leading" secondItem="vc4-3Y-FFa" secondAttribute="trailing" constant="47" id="79z-MC-46k"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="cqu-qq-oui" secondAttribute="trailing" constant="33" id="A6q-4F-LMY"/>
+                    <constraint firstItem="cqu-qq-oui" firstAttribute="leading" secondItem="QjE-tN-9tk" secondAttribute="trailing" constant="60" id="Apl-vx-iJv"/>
+                    <constraint firstItem="gIH-xh-Wia" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GX7-9D-bPD"/>
+                    <constraint firstItem="uve-ip-80l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="94" id="IR7-Uv-LFA"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="vc4-3Y-FFa" secondAttribute="bottom" constant="19.5" id="IdN-yX-Epe"/>
+                    <constraint firstAttribute="trailing" secondItem="gIH-xh-Wia" secondAttribute="trailing" id="LaO-Qd-u9r"/>
+                    <constraint firstItem="vc4-3Y-FFa" firstAttribute="baseline" secondItem="QjE-tN-9tk" secondAttribute="baseline" id="MGo-wj-5eK"/>
+                    <constraint firstItem="cqu-qq-oui" firstAttribute="baseline" secondItem="QjE-tN-9tk" secondAttribute="baseline" id="Mx4-BX-NyY"/>
+                    <constraint firstItem="gIH-xh-Wia" firstAttribute="leading" secondItem="Iik-Su-4Ca" secondAttribute="leading" id="O3M-I8-5d7"/>
+                    <constraint firstItem="Iik-Su-4Ca" firstAttribute="top" secondItem="gIH-xh-Wia" secondAttribute="bottom" constant="8" symbolic="YES" id="Qgv-6m-VJ1"/>
+                    <constraint firstItem="uve-ip-80l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ZEs-5V-le8"/>
+                    <constraint firstItem="Iik-Su-4Ca" firstAttribute="trailing" secondItem="gIH-xh-Wia" secondAttribute="trailing" id="a5C-XR-iWX"/>
+                    <constraint firstItem="gIH-xh-Wia" firstAttribute="top" secondItem="uve-ip-80l" secondAttribute="bottom" constant="12" id="dM7-mV-njQ"/>
+                    <constraint firstItem="QjE-tN-9tk" firstAttribute="top" secondItem="vc4-3Y-FFa" secondAttribute="top" id="pBQ-U7-3TZ"/>
+                    <constraint firstItem="vc4-3Y-FFa" firstAttribute="top" secondItem="Iik-Su-4Ca" secondAttribute="bottom" constant="8" symbolic="YES" id="w4I-hk-qIm"/>
+                    <constraint firstItem="gIH-xh-Wia" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xMA-rQ-FWZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="acceptButton" destination="QjE-tN-9tk" id="sMm-rJ-iQT"/>
+                <outlet property="itemImage" destination="uve-ip-80l" id="3O8-2i-dID"/>
+                <outlet property="itemName" destination="gIH-xh-Wia" id="572-Pe-0Xo"/>
+                <outlet property="price" destination="Iik-Su-4Ca" id="ipC-7E-lus"/>
+                <outlet property="rejectButton" destination="vc4-3Y-FFa" id="jeq-P9-dCe"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="temp1.png" width="200" height="200"/>
+    </resources>
+</document>
