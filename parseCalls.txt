@@ -1,0 +1,278 @@
+
+
+// Login
+
+if ([PFUser currentUser]) {
+      [[PFUser currentUser] refresh];
+      if([PFUser currentUser][@"emailVerified"] == false || [PFUser currentUser].isNew) {
+        
+        self.welcomeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Welcome unverified %@!", nil), [[PFUser currentUser] username]];
+        
+        [self.navigationController pushViewController:[[WelcomeViewController alloc] init] animated:YES];
+         
+      }
+      else
+      {
+        self.welcomeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Welcome, %@!", nil), [PFUser currentUser][@"fName"]];
+        
+        [self.navigationController pushViewController:[[KeapMainViewController alloc] init] animated:YES];
+        
+      }
+    } else {
+        self.welcomeLabel.text = NSLocalizedString(@"Not logged in", nil);
+    }
+
+
+
+------
+
+SAVE USER SCHOOL
+
+//Write the required logic here that should happen after you select a row in Picker View.
+  PFQuery *query = [PFQuery queryWithClassName:@"schoolext"];
+  [query whereKey:@"School" equalTo:[dataArray objectAtIndex:row]];
+  PFObject *result = [query getFirstObject];
+  extText.text = [NSString stringWithFormat:@"@%@",result[@"Extention"]];
+  [[PFUser currentUser] setObject:[dataArray objectAtIndex:row] forKey:@"school"];
+  [[PFUser currentUser] saveInBackground]; //-- In future may comment this line out ?
+/* Saving it */
+NSString *temp = [NSString stringWithFormat:@"%@%@", emailName.text, extText.text];
+  [[PFUser currentUser] setObject:temp forKey:@"email"];
+  [[PFUser currentUser] saveInBackground];
+-----
+
+FINDING LISTINGS
+
+PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
+    [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
+    NSInteger lim = [query countObjects];
+    [query setLimit:lim];
+    [query orderByDescending:@"updatedAt"];
+    qArray = [query findObjects];
+//gets saved into an array used to fill the table. I'm sure there's a nicer way to do this
+
+----
+
+/* POSTING A LISTING */
+
+bool pass = true;
+    
+    PFObject *listing = [PFObject objectWithClassName:@"Listings"];
+    [listing setObject:[PFUser currentUser].objectId forKey:@"ownerID"];
+    [listing setObject:[PFUser currentUser][@"school"] forKey:@"school"];
+    
+    /* SAVING NAME AND DESCRIPTION */
+    
+    DescripTableViewCell *cell = (id)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    
+    NSString *t2 = [[cell itemName] text];
+    
+    if([t2 length] == 0)
+    {
+      pass = false;
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Item Name Missing" message:@"Your listing is missing the name!" delegate:nil cancelButtonTitle:@"Oops!" otherButtonTitles:nil, nil];
+      
+      [alert show];
+      
+      return;
+      
+    }
+    [listing setObject:t2 forKey:@"itemName"];
+    [listing setObject:[[cell itemDescrip] text] forKey:@"description"];
+    
+    
+    /* SAVING PRICE */
+    
+    PricePickTableViewCell *theCell = (id)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    //UITextField *cellTextField = [theCell itemPrice];
+    
+    NSString *temp = [[theCell itemPrice] text];
+    if([temp length] == 0)
+    {
+      pass = false;
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Item Price Missing" message:@"Your listing is missing the price!" delegate:nil cancelButtonTitle:@"Oops!" otherButtonTitles:nil, nil];
+      
+      [alert show];
+      
+      return;
+      
+    }
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:temp];
+    
+    [listing setObject:myNumber forKey:@"price"];
+    
+    [listing setObject:category forKey:@"category"];
+    [listing setObject:@YES forKey:@"isAvailable"];
+    [listing setObject:[NSNumber numberWithInt:0] forKey:@"bids"];
+    if(mess == 1)
+    {
+      [listing setObject:@NO forKey:@"OBO"];
+    }
+    else
+    {
+      [listing setObject:@YES forKey:@"OBO"];
+    }
+    
+    //DO THE ITEM NAME, DESCRIP AND PHOTO :-)
+    if(pass)
+      [listing save];
+
+//Takes from every cell in view and uploads it (that's why it looks so nasty
+
+-----
+
+/* We need a search API */
+
+----
+
+/* Search by category */
+
+PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
+    [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
+    [query whereKey:@"category" equalTo:categories[indexPath.row - 1]];
+    NSInteger lim = [query countObjects];
+    if(lim != 0)
+    {
+      [query setLimit:lim];
+      [query orderByAscending:@"updatedAt"];
+      vc.qArray = [query findObjects];
+    }
+    
+    vc.titleText = categories[indexPath.row - 1];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+--------
+
+/* User Listings */
+
+PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
+  [query whereKey:@"ownerID" equalTo:[PFUser currentUser].objectId];
+  [query orderByDescending:@"updatedAt"];
+  NSInteger lim = [query countObjects];
+  qArray = [query findObjects];
+  itemBidNumber = lim;
+  
+  [heightArray addObject:[NSNumber numberWithInt:44]];
+  
+  for(int i = 0; i < lim; i++)
+  {
+    [heightArray addObject:[NSNumber numberWithInt:267]];
+    [itemArray addObject:@"temp"];
+    int temp = [((PFObject *)(qArray[i]))[@"bids"] intValue];
+    itemBidNumber += temp; //[((PFObject *)(qArray[i]))[@"bids"] intValue];
+    if(temp != 0)
+    {
+      
+      PFQuery *qTemp = [PFQuery queryWithClassName:@"Bids"];
+      [qTemp whereKey:@"listingID" equalTo:[(PFObject *)(qArray[i]) objectId]];
+      NSArray *t = [qTemp findObjects];
+      NSLog(@"Did it pick up? %@", t);
+      [itemArray addObjectsFromArray:t];
+      
+    }
+    while(temp != 0)
+    {
+      [heightArray addObject:[NSNumber numberWithInt:44]];
+      temp = temp - 1;
+    }
+    
+  }
+  
+
+-------
+
+/* USER BIDS */
+
+PFQuery *query = [PFQuery queryWithClassName:@"Bids"];
+  [query whereKey:@"requester" equalTo:[PFUser currentUser].objectId];
+  [query orderByDescending:@"updatedAt"];
+  numOfBids = [query countObjects];
+  NSArray *t = [query findObjects];
+
+  //NSLog(@"Did it pick up? %@", t);
+  [qArray addObjectsFromArray:t];
+  
+  //NSLog(@"What now? %@", qArray);
+  
+  if([qArray count] == 0)
+  {
+    
+    int imageHeight = [UIScreen mainScreen].bounds.size.width*[UIImage imageNamed:@"no_listings_image.png"].size.height/[UIImage imageNamed:@"no_listings_image.png"].size.width;
+    UIImageView *sadness = [[UIImageView alloc] initWithFrame:CGRectMake(0, ([UIScreen mainScreen].bounds.size.height - imageHeight)/2, [UIScreen mainScreen].bounds.size.width, imageHeight)];
+    sadness.image = [UIImage imageNamed:@"no_listings_image.png"];
+    
+    [self.view addSubview:sadness];
+    userListings.alpha = 0;
+  }
+
+
+-------
+
+/* GETTING A SPECIFIC LISTING DETAILS */
+
+PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
+  [query whereKey:@"objectId" equalTo:_itemObjectID];
+  PFObject *temp = (PFObject *)[query getFirstObject];
+  _itemName.text = temp[@"itemName"];
+  _itemName.adjustsFontSizeToFitWidth = YES;
+  PFFile *fil = temp[@"image"];
+  _itemImage.image = [UIImage imageWithData:[fil getData]];
+  _category.text = temp[@"category"];
+  _category.adjustsFontSizeToFitWidth = YES;
+  _itemDescrip.text = temp[@"description"];
+  
+  _canBid = [temp[@"OBO"] boolValue];
+
+  if(_canBid)
+  {
+  _bidNumber.text = [NSString stringWithFormat:@"%@ ACTIVE BIDS", temp[@"bids"]];
+  }
+  else
+  {
+   _bidNumber.text = @"AVAILABLE";
+  [_bidButton setImage:[UIImage imageNamed:@"buy_button.png"] forState:UIControlStateNormal];
+  }
+  
+  /* DISABLE BID/BUY BUTTON IF IT IS THE USER'S */
+  
+  if([temp[@"ownerID"] isEqualToString:[PFUser currentUser].objectId])
+  {
+    NSLog(@"***** TRUE");
+    _bidButton.enabled = NO;
+    _contactButton.enabled = NO;
+  }
+  
+  
+  NSString *dateString = [NSDateFormatter localizedStringFromDate:temp.createdAt
+                                                        dateStyle:NSDateFormatterShortStyle
+                                                        timeStyle:NSDateFormatterShortStyle];
+  _date.text = dateString;
+  _date.adjustsFontSizeToFitWidth = YES;
+  [_bidPrice setTitle:[NSString stringWithFormat:@"$%@",temp[@"price"]] forState:UIControlStateNormal];
+  _val = [temp[@"price"] intValue];
+  // [_bidPrice frame].size = CGSizeMake(50,50);
+  CGRect buttonFrame = _bidPrice.frame;
+  buttonFrame.size = CGSizeMake(50, 50);  // I CAN'T FIX THE SIZE :(
+  _bidPrice.frame = buttonFrame;
+  NSString *owner = temp[@"ownerID"];
+  _ownerID  = temp[@"ownerID"];
+  PFQuery *q = [PFUser query];
+  [q whereKey:@"objectId" equalTo:owner];
+  PFObject *userInf = (PFObject *)[q getFirstObject];
+  _userName.text = userInf[@"additional"];
+  _userName.adjustsFontSizeToFitWidth = YES;
+  _userSchool.text = userInf[@"school"];
+  _userSchool.adjustsFontSizeToFitWidth = YES;
+
+--------
+
+/* Need a photo upload */
+
+----
+
+/* Need messaging */
+
+----
