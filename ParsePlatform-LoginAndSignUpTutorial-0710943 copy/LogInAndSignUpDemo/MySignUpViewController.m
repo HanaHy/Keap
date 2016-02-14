@@ -8,14 +8,18 @@
 
 #import "MySignUpViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "KeapAPIBot.h"
 
 @interface MySignUpViewController ()
 @property (nonatomic, strong) UIImageView *fieldsBackground;
+
+@property (strong, nonatomic) KeapAPIBot *apiBot;
+
 @end
 
 @implementation MySignUpViewController
 
-@synthesize fieldsBackground;
+@synthesize fieldsBackground, apiBot;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,7 +35,6 @@
     [self.signUpView.signUpButton setBackgroundImage:[UIImage imageNamed:@"SignUpDown.png"] forState:UIControlStateHighlighted];
     [self.signUpView.signUpButton setTitle:@"" forState:UIControlStateNormal];
     [self.signUpView.signUpButton setTitle:@"" forState:UIControlStateHighlighted];
-  
   
     // Add background for fields
     [self setFieldsBackground:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SignUpFieldBG.png"]]];
@@ -56,6 +59,10 @@
     
     // Change "Additional" to match our use
     [self.signUpView.additionalField setPlaceholder:@"Full Name"];
+    
+    self.delegate = self;
+    
+    self.apiBot = [KeapAPIBot botWithDelegate:self];
     
 }
 
@@ -94,6 +101,40 @@
                                                          fieldFrame.origin.y + yOffset,
                                                          fieldFrame.size.width - 10.0f,
                                                          fieldFrame.size.height)];
+}
+
+
+- (BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info {
+    NSLog(@"should sign up user %@",info);
+//    [self.apiBot signupUserWithEmail:[info objectForKey:@"email"] password:[info objectForKey:@"password"] username:[info objectForKey:@"username"] fullname:[info objectForKey:@"fullname"] completion:^(KeapAPISuccessType result, NSDictionary *response) {
+//        if (result == success) {
+//            NSLog(@"%s signed up user",__FUNCTION__);
+//        }
+//        NSLog(@"%s response: %@",__FUNCTION__, response);
+//    }];
+    return YES;
+}
+
+
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+    NSLog(@"signed up user %@",user);
+    [self.apiBot signupUserWithEmail:user.email password:user.password username:user.username fullname:@"John Wick" completion:^(KeapAPISuccessType result, NSDictionary *response) {
+        if (result == success) {
+            NSLog(@"%s signed up user",__FUNCTION__);
+            [KeapAPIBot storeUserInformation:user];
+        }
+        NSLog(@"%s response: %@",__FUNCTION__, response);
+    }];
+}
+
+
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error {
+    NSLog(@"failed to sign up the user %@",error);
+}
+
+
+- (void)signUpViewControllerDidCancelSignUp:(PFSignUpViewController *)signUpController {
+    NSLog(@"user cancelled sign up");
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

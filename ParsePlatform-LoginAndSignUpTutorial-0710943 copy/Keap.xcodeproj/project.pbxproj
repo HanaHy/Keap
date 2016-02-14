@@ -191,6 +191,7 @@
 		C4BBB7C416FD2D73003CA3F7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4BBB7C116FD2D73003CA3F7 /* Default-568h@2x.png */; };
 		C4FD613617286AC800F61563 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD613517286AC800F61563 /* Icon.png */; };
 		C4FD613817286ACD00F61563 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD613717286ACD00F61563 /* Icon@2x.png */; };
+		EAD2262A1C6FF91100F23DAF /* KeapAPIBot.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD226291C6FF91100F23DAF /* KeapAPIBot.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -414,6 +415,8 @@
 		C4BBB7C116FD2D73003CA3F7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C4FD613517286AC800F61563 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		C4FD613717286ACD00F61563 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		EAD226281C6FF91100F23DAF /* KeapAPIBot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeapAPIBot.h; sourceTree = "<group>"; };
+		EAD226291C6FF91100F23DAF /* KeapAPIBot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeapAPIBot.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -605,6 +608,7 @@
 		74366EAC158AAE1000A17D8A /* LogInAndSignUpDemo */ = {
 			isa = PBXGroup;
 			children = (
+				EAD226271C6FF90100F23DAF /* API */,
 				74366EB5158AAE1000A17D8A /* AppDelegate.h */,
 				74366EB6158AAE1000A17D8A /* AppDelegate.m */,
 				74366EDD158AB49300A17D8A /* DemoTableViewController.h */,
@@ -738,6 +742,15 @@
 			name = "Subclass Customization";
 			sourceTree = "<group>";
 		};
+		EAD226271C6FF90100F23DAF /* API */ = {
+			isa = PBXGroup;
+			children = (
+				EAD226281C6FF91100F23DAF /* KeapAPIBot.h */,
+				EAD226291C6FF91100F23DAF /* KeapAPIBot.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -765,11 +778,6 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
-				TargetAttributes = {
-					74366EA1158AAE0F00A17D8A = {
-						DevelopmentTeam = KP8HLU7BW5;
-					};
-				};
 			};
 			buildConfigurationList = 74366E9C158AAE0F00A17D8A /* Build configuration list for PBXProject "Keap" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -964,6 +972,7 @@
 				74366EFA158B95C800A17D8A /* SubclassConfigViewController.m in Sources */,
 				339BAB431C2DF787009BBBBB /* ItemCollectionViewCell.m in Sources */,
 				74366F03158B973C00A17D8A /* MyLogInViewController.m in Sources */,
+				EAD2262A1C6FF91100F23DAF /* KeapAPIBot.m in Sources */,
 				338D26401C3716BD00782065 /* PersonalTableViewCell.m in Sources */,
 				74366F06158B975500A17D8A /* MySignUpViewController.m in Sources */,
 				33CB25F91C014E5C00DF74FB /* ListFeedViewController.m in Sources */,
@@ -1038,6 +1047,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1047,13 +1057,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LogInAndSignUpDemo/Keap-Prefix.pch";
 				INFOPLIST_FILE = "LogInAndSignUpDemo/Keap-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = Keap;
-				PROVISIONING_PROFILE = "5f667cb9-86ab-41a8-b521-e2c3c6ddb002";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1062,7 +1072,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hana Hyder (XSUKXK98Z9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1072,13 +1083,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LogInAndSignUpDemo/Keap-Prefix.pch";
 				INFOPLIST_FILE = "LogInAndSignUpDemo/Keap-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = Keap;
-				PROVISIONING_PROFILE = "5f667cb9-86ab-41a8-b521-e2c3c6ddb002";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

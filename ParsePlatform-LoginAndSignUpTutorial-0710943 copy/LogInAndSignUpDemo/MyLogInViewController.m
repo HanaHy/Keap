@@ -8,15 +8,19 @@
 
 #import "MyLogInViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "KeapAPIBot.h"
 
-@interface MyLogInViewController ()
+@interface MyLogInViewController () <PFLogInViewControllerDelegate>
 @property (nonatomic, strong) UIImageView *fieldsBackground, *borderBackground;
 @property (nonatomic, strong) UILabel     *promoteText, *welcome, *spinT;
+
+@property (strong, nonatomic) KeapAPIBot *apiBot;
+
 @end
 
 @implementation MyLogInViewController
 
-@synthesize fieldsBackground, borderBackground, promoteText, welcome, spinT;
+@synthesize fieldsBackground, borderBackground, promoteText, welcome, spinT, apiBot;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,20 +32,6 @@
     [self.logInView.dismissButton setImage:[UIImage imageNamed:@"Exit.png"] forState:UIControlStateNormal];
     [self.logInView.dismissButton setImage:[UIImage imageNamed:@"ExitDown.png"] forState:UIControlStateHighlighted];
     
-    /*[self.logInView.facebookButton setImage:nil forState:UIControlStateNormal];
-    [self.logInView.facebookButton setImage:nil forState:UIControlStateHighlighted];
-    [self.logInView.facebookButton setBackgroundImage:[UIImage imageNamed:@"FacebookDown.png"] forState:UIControlStateHighlighted];
-    [self.logInView.facebookButton setBackgroundImage:[UIImage imageNamed:@"Facebook.png"] forState:UIControlStateNormal];
-    [self.logInView.facebookButton setTitle:@"" forState:UIControlStateNormal];
-    [self.logInView.facebookButton setTitle:@"" forState:UIControlStateHighlighted];
-    
-    [self.logInView.twitterButton setImage:nil forState:UIControlStateNormal];
-    [self.logInView.twitterButton setImage:nil forState:UIControlStateHighlighted];
-    [self.logInView.twitterButton setBackgroundImage:[UIImage imageNamed:@"Twitter.png"] forState:UIControlStateNormal];
-    [self.logInView.twitterButton setBackgroundImage:[UIImage imageNamed:@"TwitterDown.png"] forState:UIControlStateHighlighted];
-    [self.logInView.twitterButton setTitle:@"" forState:UIControlStateNormal];
-    [self.logInView.twitterButton setTitle:@"" forState:UIControlStateHighlighted];
-    */
     [self.logInView.signUpButton setBackgroundImage:[UIImage imageNamed:@"sign_up.png"] forState:UIControlStateNormal];
     [self.logInView.signUpButton setBackgroundImage:[UIImage imageNamed:@"sign_up_down.png"] forState:UIControlStateHighlighted];
     [self.logInView.signUpButton setTitle:@"" forState:UIControlStateNormal];
@@ -91,7 +81,36 @@
   
   self.logInView.externalLogInLabel.alpha = 0;
   self.logInView.signUpLabel.alpha = 0;
+    
+    self.apiBot = [KeapAPIBot botWithDelegate:self];
    
+}
+
+- (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
+//    [self.apiBot loginUserWithEmail:username password:password username:username completion:^(KeapAPISuccessType result, NSDictionary *response) {
+//        if (result == success) {
+//            NSLog(@"%s successfully logged in user",__FUNCTION__);
+//        }
+//        NSLog(@"%s response: %@",__FUNCTION__, response);
+//    }];
+    return YES;
+}
+
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+    [self.apiBot loginUserWithEmail:user.email password:user.password username:user.username completion:^(KeapAPISuccessType result, NSDictionary *response) {
+        if (result == success) {
+            NSLog(@"%s successfully logged in user",__FUNCTION__);
+        }
+        NSLog(@"%s response: %@",__FUNCTION__, response);
+    }];
+}
+
+- (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
+    
+}
+
+- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
+    
 }
 
 - (void)viewDidLayoutSubviews {

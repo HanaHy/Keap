@@ -6,6 +6,6 @@
 //  Copyright (c) 2013 Parse. All rights reserved.
 //
 
-@interface MySignUpViewController : PFSignUpViewController
+@interface MySignUpViewController : PFSignUpViewController <PFSignUpViewControllerDelegate>
 
 @end

@@ -12,21 +12,18 @@
 //#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <Parse/Parse.h>
 #import <QuartzCore/QuartzCore.h>
+#import "KeapAPIBot.h"
 
 @interface WelcomeViewController ()
 @property (nonatomic, strong) UIImageView *borderBackground;
+
+@property (strong, nonatomic) KeapAPIBot *apiBot;
+
 @end
 
 @implementation WelcomeViewController
 
-@synthesize pickerView, dataArray, helloText, headerImageView, extText, confirmButton, emailName, borderBackground;
-
-//@synthesize dataArray;
-
-- (void) dealloc {
-  //[pickerView release];
-  //[dataArray release];
-}
+@synthesize pickerView, dataArray, helloText, headerImageView, extText, confirmButton, emailName, borderBackground, apiBot;
 
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -100,9 +97,15 @@
   for(int i = 0; i < 920; i++)
   {
     dataArray[i] = (PFObject *)(test[i])[@"School"];
+      
+      [self.apiBot addInSchool:dataArray[i] extension:@"" completion:^(KeapAPISuccessType result, NSDictionary *response) {
+          NSLog(@"%s response %@",__FUNCTION__, response);
+      }];
   }
   originalCenter = self.view.center;
   // Do any additional setup after loading the view.
+    
+    self.apiBot = [KeapAPIBot botWithDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
