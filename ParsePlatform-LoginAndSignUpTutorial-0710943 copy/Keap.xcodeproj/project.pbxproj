@@ -192,6 +192,7 @@
 		C4FD613617286AC800F61563 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD613517286AC800F61563 /* Icon.png */; };
 		C4FD613817286ACD00F61563 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD613717286ACD00F61563 /* Icon@2x.png */; };
 		EAD2262A1C6FF91100F23DAF /* KeapAPIBot.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD226291C6FF91100F23DAF /* KeapAPIBot.m */; };
+		EAD2262D1C71C29A00F23DAF /* KeapUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD2262C1C71C29A00F23DAF /* KeapUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -417,6 +418,8 @@
 		C4FD613717286ACD00F61563 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		EAD226281C6FF91100F23DAF /* KeapAPIBot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeapAPIBot.h; sourceTree = "<group>"; };
 		EAD226291C6FF91100F23DAF /* KeapAPIBot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeapAPIBot.m; sourceTree = "<group>"; };
+		EAD2262B1C71C29A00F23DAF /* KeapUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeapUser.h; sourceTree = "<group>"; };
+		EAD2262C1C71C29A00F23DAF /* KeapUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeapUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -745,6 +748,8 @@
 		EAD226271C6FF90100F23DAF /* API */ = {
 			isa = PBXGroup;
 			children = (
+				EAD2262B1C71C29A00F23DAF /* KeapUser.h */,
+				EAD2262C1C71C29A00F23DAF /* KeapUser.m */,
 				EAD226281C6FF91100F23DAF /* KeapAPIBot.h */,
 				EAD226291C6FF91100F23DAF /* KeapAPIBot.m */,
 			);
@@ -967,6 +972,7 @@
 				3325B0C51BF46B3400EACEB1 /* TutorialViewController.m in Sources */,
 				74366EE7158AC82C00A17D8A /* DefaultSettingsViewController.m in Sources */,
 				33FED06D1C0D328500A4B211 /* PricePickTableViewCell.m in Sources */,
+				EAD2262D1C71C29A00F23DAF /* KeapUser.m in Sources */,
 				33FED07C1C0D612800A4B211 /* SBarTableViewCell.m in Sources */,
 				74366EF4158AF2D300A17D8A /* PropertyConfigViewController.m in Sources */,
 				74366EFA158B95C800A17D8A /* SubclassConfigViewController.m in Sources */,

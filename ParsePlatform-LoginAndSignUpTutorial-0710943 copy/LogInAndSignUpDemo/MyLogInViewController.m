@@ -9,6 +9,7 @@
 #import "MyLogInViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "KeapAPIBot.h"
+#import "WelcomeViewController.h"
 
 @interface MyLogInViewController () <PFLogInViewControllerDelegate>
 @property (nonatomic, strong) UIImageView *fieldsBackground, *borderBackground;
@@ -84,6 +85,20 @@
     
     self.apiBot = [KeapAPIBot botWithDelegate:self];
    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"view appeared");
+    if ([KeapAPIBot isUserSignedIn]) {
+        NSLog(@"user signed in");
+        if ([KeapAPIBot isUserNeedSchool]) {
+            NSLog(@"user needs school");
+        } else {
+            NSLog(@"user signed in, has school show welcome (For scraping)");
+            WelcomeViewController *welcome = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:nil];
+            [self presentViewController:welcome animated:YES completion:nil];
+        }
+    }
 }
 
 - (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {

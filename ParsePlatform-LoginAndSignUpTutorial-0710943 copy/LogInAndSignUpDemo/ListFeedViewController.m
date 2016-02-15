@@ -13,10 +13,13 @@
 #import <Parse/Parse.h>
 #import <QuartzCore/QuartzCore.h>
 #import "ItemDetailViewController.h"
+#import "KeapAPIBot.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @interface ListFeedViewController ()
+
+@property (strong, nonatomic) KeapAPIBot *apiBot;
 
 @end
 
@@ -43,6 +46,8 @@
     [query orderByDescending:@"updatedAt"];
     qArray = [query findObjects];
   }
+    
+    self.apiBot = [KeapAPIBot botWithDelegate:self];
   
   /*CGRect tabFrame = self.tabBar.frame; //self.TabBar is IBOutlet of your TabBar
    tabFrame.size.height = 75;
@@ -71,6 +76,8 @@
     /*[self.view addSubview:view];
     
   }*/
+    
+    
   
 }
 

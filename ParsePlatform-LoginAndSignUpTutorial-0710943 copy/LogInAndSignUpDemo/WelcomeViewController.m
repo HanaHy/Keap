@@ -39,24 +39,26 @@
   
   pickerView.delegate = self;
   emailName.delegate  = self;
-  [[PFUser currentUser] refresh];
-  NSString *fName, *lName, *string, *match;
-  match = @" ";
-  string = [PFUser currentUser][@"additional"];
-  NSScanner *scanner = [NSScanner scannerWithString:string];
-  [scanner scanUpToString:match intoString:&fName];
+//  [[PFUser currentUser] refresh];
+//  NSString *fName, *lName, *string, *match;
+//  match = @" ";
+//  string = [PFUser currentUser][@"additional"];
+//  NSScanner *scanner = [NSScanner scannerWithString:string];
+//  [scanner scanUpToString:match intoString:&fName];
+//  
+//  [scanner scanString:match intoString:nil];
+//  lName = [string substringFromIndex:scanner.scanLocation];
+//
+//  
+// // NSLog(@"***The user's info is %@", [PFUser currentUser][@"additional"]);
+//  [[PFUser currentUser] setObject:fName forKey:@"fName"];
+//  [[PFUser currentUser] setObject:lName forKey:@"lName"];
+//  [[PFUser currentUser] saveInBackground];
+//  [[PFUser currentUser] refresh];
+    
+    
   
-  [scanner scanString:match intoString:nil];
-  lName = [string substringFromIndex:scanner.scanLocation];
-
-  
- // NSLog(@"***The user's info is %@", [PFUser currentUser][@"additional"]);
-  [[PFUser currentUser] setObject:fName forKey:@"fName"];
-  [[PFUser currentUser] setObject:lName forKey:@"lName"];
-  [[PFUser currentUser] saveInBackground];
-  [[PFUser currentUser] refresh];
-  
-  helloText.text = [NSString stringWithFormat:@"%@, %@!", @"Hey", [PFUser currentUser][@"fName"]];
+  helloText.text = [NSString stringWithFormat:@"%@, %@!", @"Hey", ];
   
   
   CGFloat x = [UIImage imageNamed:@"clouds.png"].size.height*([[UIScreen mainScreen] bounds].size.width/[UIImage imageNamed:@"clouds.png"].size.width);
@@ -97,10 +99,10 @@
   for(int i = 0; i < 920; i++)
   {
     dataArray[i] = (PFObject *)(test[i])[@"School"];
-      
-      [self.apiBot addInSchool:dataArray[i] extension:@"" completion:^(KeapAPISuccessType result, NSDictionary *response) {
-          NSLog(@"%s response %@",__FUNCTION__, response);
-      }];
+      NSLog(@"%s %@",__FUNCTION__,(PFObject *)(test[i]));
+//      [self.apiBot addInSchool:dataArray[i] extension:@"" completion:^(KeapAPISuccessType result, NSDictionary *response) {
+//          NSLog(@"%s response %@",__FUNCTION__, response);
+//      }];
   }
   originalCenter = self.view.center;
   // Do any additional setup after loading the view.

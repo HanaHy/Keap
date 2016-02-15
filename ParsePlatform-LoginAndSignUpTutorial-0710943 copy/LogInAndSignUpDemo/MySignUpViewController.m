@@ -106,13 +106,13 @@
 
 - (BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info {
     NSLog(@"should sign up user %@",info);
-//    [self.apiBot signupUserWithEmail:[info objectForKey:@"email"] password:[info objectForKey:@"password"] username:[info objectForKey:@"username"] fullname:[info objectForKey:@"fullname"] completion:^(KeapAPISuccessType result, NSDictionary *response) {
-//        if (result == success) {
-//            NSLog(@"%s signed up user",__FUNCTION__);
-//        }
-//        NSLog(@"%s response: %@",__FUNCTION__, response);
-//    }];
-    return YES;
+    [self.apiBot signupUserWithEmail:[info objectForKey:@"email"] password:[info objectForKey:@"password"] username:[info objectForKey:@"username"] fullname:[info objectForKey:@"additional"] completion:^(KeapAPISuccessType result, NSDictionary *response) {
+        if (result == success) {
+            NSLog(@"%s signed up user",__FUNCTION__);
+        }
+        NSLog(@"%s response: %@",__FUNCTION__, response);
+    }];
+    return NO;
 }
 
 
@@ -121,7 +121,7 @@
     [self.apiBot signupUserWithEmail:user.email password:user.password username:user.username fullname:@"John Wick" completion:^(KeapAPISuccessType result, NSDictionary *response) {
         if (result == success) {
             NSLog(@"%s signed up user",__FUNCTION__);
-            [KeapAPIBot storeUserInformation:user];
+            
         }
         NSLog(@"%s response: %@",__FUNCTION__, response);
     }];
