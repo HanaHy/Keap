@@ -45,5 +45,9 @@ typedef NS_ENUM(NSInteger, KeapAPISuccessType) {
 
 - (void)fetchSchoolsWithCompletion:(void (^)(KeapAPISuccessType result, NSDictionary *response))completion;
 
+- (void)fetchCategoriesWithCompletion:(void (^)(KeapAPISuccessType result, NSDictionary *response))completion;
+
+- (void)search:(NSString *)term withCompletion:(void (^)(KeapAPISuccessType result, NSDictionary *response))completion;
+
 
 @end

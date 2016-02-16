@@ -12,6 +12,8 @@
 #import "SearchGridViewController.h"
 #import <Parse/Parse.h>
 #import <QuartzCore/QuartzCore.h>
+#import "KeapUser.h"
+#import "KeapAPIBot.h"
 
 #ifdef __IPHONE_6_0
 # define ALIGN_CENTER NSTextAlignmentCenter
@@ -20,6 +22,9 @@
 #endif
 
 @interface SearchViewController ()
+
+@property (strong, nonatomic) KeapAPIBot *apiBot;
+@property (strong, nonatomic) dispatch_queue_t apiThread;
 
 @end
 
@@ -30,25 +35,28 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  categories = [[NSMutableArray alloc] init];
+  self.categories = [[NSMutableArray alloc] init];
+    
+    self.apiBot = [KeapAPIBot botWithDelegate:self];
+    self.apiThread = dispatch_queue_create("search.api", DISPATCH_QUEUE_SERIAL);
   
-  [categories addObject:@"Accessories"];
-  [categories addObject:@"Bikes & Auto"];
-  
-  [categories addObject:@"Clothing"];
-  [categories addObject:@"DC Swipes"];
-  
-  [categories addObject:@"Electronics"];
-  [categories addObject:@"Furniture"];
-  [categories addObject:@"Gardening"];
-  [categories addObject:@"Kitchen"];
-  //[categories addObject:@"Labor & Moving"];
-  [categories addObject:@"Outdoor & Recreation"];
-  [categories addObject:@"Pets & Supply"];
-  [categories addObject:@"School Supplies"];
-  [categories addObject:@"Textbooks"];
-  [categories addObject:@"Tickets"];
-  [categories addObject:@"Other"];
+//  [categories addObject:@"Accessories"];
+//  [categories addObject:@"Bikes & Auto"];
+//  
+//  [categories addObject:@"Clothing"];
+//  [categories addObject:@"DC Swipes"];
+//  
+//  [categories addObject:@"Electronics"];
+//  [categories addObject:@"Furniture"];
+//  [categories addObject:@"Gardening"];
+//  [categories addObject:@"Kitchen"];
+//  //[categories addObject:@"Labor & Moving"];
+//  [categories addObject:@"Outdoor & Recreation"];
+//  [categories addObject:@"Pets & Supply"];
+//  [categories addObject:@"School Supplies"];
+//  [categories addObject:@"Textbooks"];
+//  [categories addObject:@"Tickets"];
+//  [categories addObject:@"Other"];
   /*[categories addObject:@"Accessories"];
    [categories addObject:@"Bath"];
    [categories addObject:@"Bed"];
@@ -85,14 +93,34 @@
   }
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    dispatch_async(self.apiThread, ^{
+        [self.apiBot fetchCategoriesWithCompletion:^(KeapAPISuccessType result, NSDictionary *response) {
+            if (result == success) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.categories = [response objectForKey:@"categories"];
+                    [self.categoryListings registerClass:[UITableViewCell class] forCellReuseIdentifier:@"categoryCell"];
+                    [self.categoryListings reloadData];
+                });
+            }
+            NSLog(@"%s %@",__FUNCTION__, response);
+        }];
+    });
+}
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    self.categoryListings = tableView;
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 15;
+    NSLog(@"%s about to show %d",__FUNCTION__,(int)self.categories.count);
+  return self.categories.count + 1;
   // return 1;
 }
 
@@ -115,7 +143,7 @@
     return cell;
   }
   
-  UITableViewCell *cell = [[UITableViewCell alloc] init];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"categoryCell" forIndexPath:indexPath];
   
   //cell.backgroundColor = [UIColor colorWithRed:0 green:0.7411 blue:1 alpha:1];
   //cell.textLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
@@ -190,24 +218,24 @@
   // Navigation logic may go here. Create and push another view controller.
   if(indexPath.row != 0)
   {
-    SearchGridViewController  *vc = [[SearchGridViewController alloc] init];
-    //vc.pq = [PFQuery queryWithClassName:@"Listings"];//= [[PFQuery queryWithClassName:@"Listings"];
-    //[vc.pq whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
-    [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
-    [query whereKey:@"category" equalTo:categories[indexPath.row - 1]];
-    NSInteger lim = [query countObjects];
-    if(lim != 0)
-    {
-      [query setLimit:lim];
-      [query orderByAscending:@"updatedAt"];
-      vc.qArray = [query findObjects];
-    }
-    
-    vc.titleText = categories[indexPath.row - 1];
-    
-    [self.navigationController pushViewController:vc animated:YES];
+//    SearchGridViewController  *vc = [[SearchGridViewController alloc] init];
+//    //vc.pq = [PFQuery queryWithClassName:@"Listings"];//= [[PFQuery queryWithClassName:@"Listings"];
+//    //[vc.pq whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
+//    
+//    PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
+//    [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
+//    [query whereKey:@"category" equalTo:categories[indexPath.row - 1]];
+//    NSInteger lim = [query countObjects];
+//    if(lim != 0)
+//    {
+//      [query setLimit:lim];
+//      [query orderByAscending:@"updatedAt"];
+//      vc.qArray = [query findObjects];
+//    }
+//    
+//    vc.titleText = categories[indexPath.row - 1];
+//    
+//    [self.navigationController pushViewController:vc animated:YES];
   }
 }
 

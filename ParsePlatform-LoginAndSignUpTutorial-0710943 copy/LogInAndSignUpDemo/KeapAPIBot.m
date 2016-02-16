@@ -14,17 +14,23 @@
  url(r'^signup/', 'api.views.userSignup'),
  url(r'^update/school/', 'api.views.updateSchool'),
  url(r'^enter/school/', 'api.views.enterInSchool'),
+ url(r'^list/', 'api.views.fetchListings'),
+ url(r'^allschools/', 'api.views.fetchSchools'),
+ url(r'^categories/', 'api.views.allCategories'),
+ url(r'^search/', 'api.views.searchListings'),
 */
 
-#define SERVERADDRESS "http://54.67.2.39:80/"
-#define LOGIN "login/"
-#define SIGNUP "signup/"
-#define UPDATE_SCHOOL "update/school/"
-#define ENTER_SCHOOL "enter/school/"
-#define LIST_SCHOOL "allschools/"
-#define ALL_LISTINGS "list/"
+#define SERVERADDRESS       "http://54.67.2.39:80/"
+#define LOGIN               "login/"
+#define SIGNUP              "signup/"
+#define UPDATE_SCHOOL       "update/school/"
+#define ENTER_SCHOOL        "enter/school/"
+#define LIST_SCHOOL         "allschools/"
+#define ALL_LISTINGS        "list/"
+#define ALL_CATEGORIES      "categories/"
+#define SEARCH              "search/"
 
-NSString *userInfoKey = @"userInfo";
+NSString *userInfoKey     = @"userInfo";
 
 @implementation KeapAPIBot
 
@@ -406,5 +412,103 @@ NSString *userInfoKey = @"userInfo";
     }
 }
 
+- (void)fetchCategoriesWithCompletion:(void (^)(KeapAPISuccessType result, NSDictionary *response))completion {
+    NSMutableDictionary *postxhashList = [[NSMutableDictionary alloc] init];
+    
+    NSLog(@"posthash:%@",postxhashList);
+    
+    @try {
+        NSError *error = nil;
+        NSData *result =[NSJSONSerialization dataWithJSONObject:postxhashList options:0 error:&error];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%s%s",SERVERADDRESS,ALL_CATEGORIES]]];
+        
+        //customize request information
+        [request setHTTPMethod:@"POST"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:[NSString stringWithFormat:@"%ld", (long)postxhashList.count] forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:result];
+        
+        NSURLResponse *response = nil;
+        
+        //fire the request and wait for response
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            @try {
+                NSError *error;
+                NSString *decodedString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"decoded string is %@",decodedString);
+                NSDictionary *momentsData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+                NSLog(@"node array is %@",momentsData);
+                
+                completion(success, momentsData);
+            }
+            @catch (NSException *exception) {
+                NSLog(@"issue trying to post is %@",exception);
+            }
+            @finally {
+                NSLog(@"finally n shit");
+            }
+        }];
+    }
+    @catch (NSException *exception)
+    {
+        NSLog(@"exception is %@",exception);
+    }
+    @finally
+    {
+        NSLog(@"elevate yo self");
+    }
+}
+
+- (void)search:(NSString *)term withCompletion:(void (^)(KeapAPISuccessType result, NSDictionary *response))completion {
+    NSMutableDictionary *postxhashList = [[NSMutableDictionary alloc] init];
+    
+    [postxhashList setObject:term forKey:@"term"];
+    [postxhashList setObject:@"" forKey:@"category"];
+    
+    NSLog(@"posthash:%@",postxhashList);
+    
+    @try {
+        NSError *error = nil;
+        NSData *result =[NSJSONSerialization dataWithJSONObject:postxhashList options:0 error:&error];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%s%s",SERVERADDRESS,SEARCH]]];
+        
+        //customize request information
+        [request setHTTPMethod:@"POST"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:[NSString stringWithFormat:@"%ld", (long)postxhashList.count] forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:result];
+        
+        NSURLResponse *response = nil;
+        
+        //fire the request and wait for response
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            @try {
+                NSError *error;
+                NSString *decodedString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"decoded string is %@",decodedString);
+                NSDictionary *momentsData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+                NSLog(@"node array is %@",momentsData);
+                
+                completion(success, momentsData);
+            }
+            @catch (NSException *exception) {
+                NSLog(@"issue trying to post is %@",exception);
+            }
+            @finally {
+                NSLog(@"finally n shit");
+            }
+        }];
+    }
+    @catch (NSException *exception)
+    {
+        NSLog(@"exception is %@",exception);
+    }
+    @finally
+    {
+        NSLog(@"elevate yo self");
+    }
+}
 
 @end

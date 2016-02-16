@@ -78,7 +78,7 @@
     user.password = @"";
     user.fullname = fullname;
     user.email = email;
-    user.school = @"";
+    user.school = school;
     user.needsProfilePicture = needsProfilePicture;
     user.needsSchoolEmail = needsSchoolEmail;
     user.needsSignUp = needsSignUp;
@@ -121,6 +121,7 @@
 }
 
 + (void)setSchool:(NSString *)school {
+    NSLog(@"%s updating: %@",__FUNCTION__, school);
     NSMutableDictionary *userSettings = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:userInfoKey]];
     [userSettings setObject:school forKey:@"school"];
     [[NSUserDefaults standardUserDefaults] setObject:userSettings forKey:userInfoKey];
