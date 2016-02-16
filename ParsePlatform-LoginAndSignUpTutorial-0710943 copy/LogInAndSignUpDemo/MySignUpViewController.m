@@ -9,6 +9,7 @@
 #import "MySignUpViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "KeapAPIBot.h"
+#import "KeapUser.h"
 
 @interface MySignUpViewController ()
 @property (nonatomic, strong) UIImageView *fieldsBackground;
@@ -108,7 +109,13 @@
     NSLog(@"should sign up user %@",info);
     [self.apiBot signupUserWithEmail:[info objectForKey:@"email"] password:[info objectForKey:@"password"] username:[info objectForKey:@"username"] fullname:[info objectForKey:@"additional"] completion:^(KeapAPISuccessType result, NSDictionary *response) {
         if (result == success) {
+            [KeapUser setNeedsSignUp:NO];
             NSLog(@"%s signed up user",__FUNCTION__);
+            if (self.navigationController) {
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
         }
         NSLog(@"%s response: %@",__FUNCTION__, response);
     }];
@@ -118,13 +125,13 @@
 
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
     NSLog(@"signed up user %@",user);
-    [self.apiBot signupUserWithEmail:user.email password:user.password username:user.username fullname:@"John Wick" completion:^(KeapAPISuccessType result, NSDictionary *response) {
-        if (result == success) {
-            NSLog(@"%s signed up user",__FUNCTION__);
-            
-        }
-        NSLog(@"%s response: %@",__FUNCTION__, response);
-    }];
+//    [self.apiBot signupUserWithEmail:user.email password:user.password username:user.username fullname:@"John Wick" completion:^(KeapAPISuccessType result, NSDictionary *response) {
+//        if (result == success) {
+//            NSLog(@"%s signed up user",__FUNCTION__);
+//            
+//        }
+//        NSLog(@"%s response: %@",__FUNCTION__, response);
+//    }];
 }
 
 

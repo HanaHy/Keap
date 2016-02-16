@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *userInfoKey;
+
 typedef NS_ENUM(NSInteger, KeapAPISuccessType) {
     success = 1,
     errorR,
@@ -23,13 +25,11 @@ typedef NS_ENUM(NSInteger, KeapAPISuccessType) {
 
 @interface KeapAPIBot : NSObject
 
-@property (strong, nonatomic) 
-
 @property (weak, nonatomic) id<KeapAPIDelegate> delegate;
 
 // class methods
 + (KeapAPIBot *)botWithDelegate:(id)delegate;
-+ (void)storeUserInformation:(PFUser *)user;
+//+ (void)storeUserInformation:(PFUser *)user;
 + (BOOL)isUserSignedIn;
 + (BOOL)isUserNeedSchool;
 
@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, KeapAPISuccessType) {
 
 - (void)fetchListings:(NSString *)school completion:(void (^)(KeapAPISuccessType result, NSDictionary *response))completion;
 
+- (void)fetchSchoolsWithCompletion:(void (^)(KeapAPISuccessType result, NSDictionary *response))completion;
 
 
 @end

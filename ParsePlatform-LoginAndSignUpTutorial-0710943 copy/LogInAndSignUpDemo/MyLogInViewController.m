@@ -9,6 +9,7 @@
 #import "MyLogInViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "KeapAPIBot.h"
+#import "KeapUser.h"
 #import "WelcomeViewController.h"
 
 @interface MyLogInViewController () <PFLogInViewControllerDelegate>
@@ -88,27 +89,39 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"view appeared");
-    if ([KeapAPIBot isUserSignedIn]) {
-        NSLog(@"user signed in");
-        if ([KeapAPIBot isUserNeedSchool]) {
-            NSLog(@"user needs school");
+    NSLog(@"%s",__FUNCTION__);
+    if ([KeapUser isLoggedIn]) {
+        if ([[KeapUser currentUser] needsSchoolEmail]) {
+            [self showWelcomeSequence];
         } else {
-            NSLog(@"user signed in, has school show welcome (For scraping)");
-            WelcomeViewController *welcome = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:nil];
-            [self presentViewController:welcome animated:YES completion:nil];
+            [self proceedToApp];
         }
+    } else {
+        
+    }
+}
+
+- (void)proceedToApp {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)showWelcomeSequence {
+    WelcomeViewController *welcome = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:nil];
+    if (self.navigationController) {
+        [self.navigationController pushViewController:welcome animated:YES];
+    } else {
+        [self presentViewController:welcome animated:YES completion:nil];
     }
 }
 
 - (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
-//    [self.apiBot loginUserWithEmail:username password:password username:username completion:^(KeapAPISuccessType result, NSDictionary *response) {
-//        if (result == success) {
-//            NSLog(@"%s successfully logged in user",__FUNCTION__);
-//        }
-//        NSLog(@"%s response: %@",__FUNCTION__, response);
-//    }];
-    return YES;
+    [self.apiBot loginUserWithEmail:username password:password username:username completion:^(KeapAPISuccessType result, NSDictionary *response) {
+        if (result == success) {
+            NSLog(@"%s successfully logged in user",__FUNCTION__);
+        }
+        NSLog(@"%s response: %@",__FUNCTION__, response);
+    }];
+    return NO;
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {

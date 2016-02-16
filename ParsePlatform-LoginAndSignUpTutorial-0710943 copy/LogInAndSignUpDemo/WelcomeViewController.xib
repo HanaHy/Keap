@@ -28,7 +28,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <pickerView contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEP-WD-oO8">
+                <pickerView tag="117" contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEP-WD-oO8">
                     <rect key="frame" x="0.0" y="181" width="600" height="123"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="szy-1g-f5A"/>

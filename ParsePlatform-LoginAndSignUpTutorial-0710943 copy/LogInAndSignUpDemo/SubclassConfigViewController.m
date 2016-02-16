@@ -11,6 +11,7 @@
 #import "MySignUpViewController.h"
 #import "WelcomeViewController.h"
 #import "KeapMainViewController.h"
+#import "KeapUser.h"
 //#import "TutorialMainViewController.h"
 
 @implementation SubclassConfigViewController
@@ -21,34 +22,35 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
   [[self navigationController] setNavigationBarHidden:YES animated:animated];
-    if ([PFUser currentUser]) {
-      [[PFUser currentUser] refresh];
-      if([PFUser currentUser][@"emailVerified"] == false || [PFUser currentUser].isNew) {
-        
-       /* //UNCOMMENT THIS &&
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Verify Your Email" message:@"Sorry, to ensure your safety you must first verify your email." delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-        
-        [alert show];
-        */
-        
-        
-        self.welcomeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Welcome unverified %@!", nil), [[PFUser currentUser] username]];
-        
-        [self.navigationController pushViewController:[[WelcomeViewController alloc] init] animated:YES];
-         
-      }
-      else
-      {
-        self.welcomeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Welcome, %@!", nil), [PFUser currentUser][@"fName"]];
-        
-        //[self.navigationController pushViewController:[[WelcomeViewController alloc] init] animated:YES];
-        [self.navigationController pushViewController:[[KeapMainViewController alloc] init] animated:YES];
-        //[self.navigationController pushViewController:[[TutorialMainViewController alloc] init] animated:YES];
-        
-      }
-    } else {
-        self.welcomeLabel.text = NSLocalizedString(@"Not logged in", nil);
-    }
+//    if ([PFUser currentUser]) {
+//      [[PFUser currentUser] refresh];
+//      if([PFUser currentUser][@"emailVerified"] == false || [PFUser currentUser].isNew) {
+//        
+//       /* //UNCOMMENT THIS &&
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Verify Your Email" message:@"Sorry, to ensure your safety you must first verify your email." delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+//        
+//        [alert show];
+//        */
+//        
+//        
+//        self.welcomeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Welcome unverified %@!", nil), [[PFUser currentUser] username]];
+//        
+//        [self.navigationController pushViewController:[[WelcomeViewController alloc] init] animated:YES];
+//         
+//      }
+//      else
+//      {
+//        self.welcomeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Welcome, %@!", nil), [PFUser currentUser][@"fName"]];
+//        
+//        //[self.navigationController pushViewController:[[WelcomeViewController alloc] init] animated:YES];
+//        [self.navigationController pushViewController:[[KeapMainViewController alloc] init] animated:YES];
+//        //[self.navigationController pushViewController:[[TutorialMainViewController alloc] init] animated:YES];
+//        
+//      }
+//    } else {
+//        self.welcomeLabel.text = NSLocalizedString(@"Not logged in", nil);
+//    }
+    self.welcomeLabel.text = @"";
   int imageHeight = [UIScreen mainScreen].bounds.size.width*0.5*[UIImage imageNamed:@"frame_0.gif"].size.height/[UIImage imageNamed:@"frame_0.gif"].size.width;
   UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width*0.25, ([UIScreen mainScreen].bounds.size.height - imageHeight)/2, [UIScreen mainScreen].bounds.size.width*0.5, imageHeight)];
   animatedImageView.animationImages = [NSArray arrayWithObjects:
@@ -122,8 +124,30 @@
     [super viewDidAppear:animated];
     
     // Check if user is logged in
-    if (![PFUser currentUser]) {        
-        // Customize the Log In View Controller
+//    if (![PFUser currentUser]) {        
+//        // Customize the Log In View Controller
+//        MyLogInViewController *logInViewController = [[MyLogInViewController alloc] init];
+//        logInViewController.delegate = self;
+//        logInViewController.facebookPermissions = @[@"friends_about_me"];
+//        logInViewController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsTwitter | PFLogInFieldsFacebook | PFLogInFieldsSignUpButton | PFLogInFieldsDismissButton;
+//        
+//        // Customize the Sign Up View Controller
+//        MySignUpViewController *signUpViewController = [[MySignUpViewController alloc] init];
+//        signUpViewController.delegate = self;
+//        signUpViewController.fields = PFSignUpFieldsDefault | PFSignUpFieldsAdditional;
+//        logInViewController.signUpController = signUpViewController;
+//        
+//        // Present Log In View Controller
+//        [self presentViewController:logInViewController animated:YES completion:NULL];
+//    }
+    
+    if ([KeapUser isLoggedIn]) {
+        if ([[KeapUser currentUser] needsSchoolEmail]) {
+            [self showWelcomeSequence];
+        } else {
+            [self proceedToApp];
+        }
+    } else {
         MyLogInViewController *logInViewController = [[MyLogInViewController alloc] init];
         logInViewController.delegate = self;
         logInViewController.facebookPermissions = @[@"friends_about_me"];
@@ -136,10 +160,26 @@
         logInViewController.signUpController = signUpViewController;
         
         // Present Log In View Controller
-        [self presentViewController:logInViewController animated:YES completion:NULL];
+        [self presentViewController:logInViewController animated:YES completion:nil];
     }
 }
 
+- (void)proceedToApp {
+    if (self.navigationController) {
+        [self.navigationController pushViewController:[[KeapMainViewController alloc] init] animated:YES];
+    } else {
+        [self presentViewController:[[KeapMainViewController alloc] init] animated:YES completion:nil];
+    }
+}
+
+- (void)showWelcomeSequence {
+    WelcomeViewController *welcome = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:nil];
+    if (self.navigationController) {
+        [self.navigationController pushViewController:welcome animated:YES];
+    } else {
+        [self presentViewController:welcome animated:YES completion:nil];
+    }
+}
 
 #pragma mark - PFLogInViewControllerDelegate
 

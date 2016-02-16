@@ -14,12 +14,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ItemDetailViewController.h"
 #import "KeapAPIBot.h"
+#import "KeapUser.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @interface ListFeedViewController ()
 
 @property (strong, nonatomic) KeapAPIBot *apiBot;
+@property (strong, nonatomic) dispatch_queue_t apiThread;
 
 @end
 
@@ -30,24 +32,25 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   //[[[self tabBarController] navigationItem] setTitle:@"News Feed"];
-  if([PFUser currentUser][@"emailVerified"] == false)
-  {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Verify Your Email" message:@"Sorry, you must first verify your email to access this feature." delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    
-    [alert show];
-  }
-  else{
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
-    [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
-    NSInteger lim = [query countObjects];
-    [query setLimit:lim];
-    [query orderByDescending:@"updatedAt"];
-    qArray = [query findObjects];
-  }
+//  if([PFUser currentUser][@"emailVerified"] == false)
+//  {
+//    
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Verify Your Email" message:@"Sorry, you must first verify your email to access this feature." delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+//    
+//    [alert show];
+//  }
+//  else{
+//    
+//    PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
+//    [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
+//    NSInteger lim = [query countObjects];
+//    [query setLimit:lim];
+//    [query orderByDescending:@"updatedAt"];
+//    qArray = [query findObjects];
+//  }
     
     self.apiBot = [KeapAPIBot botWithDelegate:self];
+    self.apiThread = dispatch_queue_create("listfeed.api", DISPATCH_QUEUE_SERIAL);
   
   /*CGRect tabFrame = self.tabBar.frame; //self.TabBar is IBOutlet of your TabBar
    tabFrame.size.height = 75;
@@ -77,8 +80,25 @@
     
   }*/
     
-    
-  
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    dispatch_async(self.apiThread, ^{
+        [self.apiBot fetchListings:[[KeapUser currentUser] school] completion:^(KeapAPISuccessType result, NSDictionary *response) {
+            //
+            if (result == success) {
+                NSArray *listings = [response objectForKey:@"listings"];
+                if ([listings count] == 0) {
+                    // There are no listings for this school
+                }
+                NSLog(@"%s %@",__FUNCTION__, listings);
+                qArray = listings;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.newsListings reloadData];
+                });
+            }
+        }];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,10 +108,11 @@
 
 #pragma mark - TableView Implementation
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
-  [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
-  return [query countObjects];
-  // return 2;
+//  PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
+//  [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
+//  return [query countObjects];
+//  // return 2;
+    return [qArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,7 +130,16 @@
     [tableView registerNib:[UINib nibWithNibName:@"NewsTableViewCell" bundle:nil] forCellReuseIdentifier:@"newFriendCell"];
     cell = [tableView dequeueReusableCellWithIdentifier:@"newFriendCell"];
   }
-  
+    
+//    school = EmbeddedModelField('School')
+//    owner = EmbeddedModelField('User')
+//    name = models.CharField(max_length=150)
+//    price = models.DecimalField(max_digits=8, decimal_places=2)
+//    bids = ListField(EmbeddedModelField('Bid'))
+//    description = models.TextField()
+//    images = models.CharField(max_length=150)
+    
+    
   
   //cell.itemName.text = @"temp";
   NSInteger i = indexPath.row;
