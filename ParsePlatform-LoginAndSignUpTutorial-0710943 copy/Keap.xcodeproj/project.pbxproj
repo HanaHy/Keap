@@ -180,6 +180,7 @@
 		747F007915951A58000F601E /* FacebookDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 747F006D15951A58000F601E /* FacebookDown.png */; };
 		747F008015951A58000F601E /* Twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 747F007415951A58000F601E /* Twitter.png */; };
 		747F008115951A58000F601E /* TwitterDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 747F007515951A58000F601E /* TwitterDown.png */; };
+		C2E16B1EE0EB539EF99DE320 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78817CF6C066DED2D42B01C9 /* Pods.framework */; };
 		C4BBB7B516FD2ABC003CA3F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4BBB7B316FD2ABC003CA3F7 /* CoreLocation.framework */; };
 		C4BBB7B616FD2ABC003CA3F7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4BBB7B416FD2ABC003CA3F7 /* StoreKit.framework */; };
 		C4BBB7BA16FD2B0F003CA3F7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4BBB7B716FD2B0F003CA3F7 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -193,11 +194,14 @@
 		C4FD613817286ACD00F61563 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD613717286ACD00F61563 /* Icon@2x.png */; };
 		EAD2262A1C6FF91100F23DAF /* KeapAPIBot.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD226291C6FF91100F23DAF /* KeapAPIBot.m */; };
 		EAD2262D1C71C29A00F23DAF /* KeapUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD2262C1C71C29A00F23DAF /* KeapUser.m */; };
+		EAD226301C75A53600F23DAF /* KeapChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2262F1C75A53600F23DAF /* KeapChat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		143C2CDC18203DBB00DFCD05 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		143C2CDE182058B900DFCD05 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		1592B8A9880C57F1F41BA5BE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		2B1051A9DDCA09FA4499637A /* Pods-Keap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keap/Pods-Keap.debug.xcconfig"; sourceTree = "<group>"; };
 		33012BF31C05B5CE000FB0FE /* PostListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListingViewController.h; sourceTree = "<group>"; };
 		33012BF41C05B5CE000FB0FE /* PostListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListingViewController.m; sourceTree = "<group>"; };
 		33012BF51C05B5CE000FB0FE /* PostListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostListingViewController.xib; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 		33FED07A1C0D612800A4B211 /* SBarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBarTableViewCell.m; sourceTree = "<group>"; };
 		33FED07B1C0D612800A4B211 /* SBarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBarTableViewCell.xib; sourceTree = "<group>"; };
 		33FED07E1C0D758800A4B211 /* iOSWelcomeScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iOSWelcomeScreen.png; sourceTree = "<group>"; };
+		70D50D092841CE53D8C9C8D2 /* Pods-Keap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keap.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keap/Pods-Keap.release.xcconfig"; sourceTree = "<group>"; };
 		74366EA2158AAE0F00A17D8A /* Keap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74366EA6158AAE0F00A17D8A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		74366EA8158AAE0F00A17D8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -405,6 +410,9 @@
 		747F006D15951A58000F601E /* FacebookDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FacebookDown.png; sourceTree = "<group>"; };
 		747F007415951A58000F601E /* Twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Twitter.png; sourceTree = "<group>"; };
 		747F007515951A58000F601E /* TwitterDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterDown.png; sourceTree = "<group>"; };
+		78817CF6C066DED2D42B01C9 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92541999F340DE9A7B81E1E0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B68B2605CA40D7EF8132DDB0 /* Pods_Keap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Keap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4BBB7B316FD2ABC003CA3F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C4BBB7B416FD2ABC003CA3F7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C4BBB7B716FD2B0F003CA3F7 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -420,6 +428,11 @@
 		EAD226291C6FF91100F23DAF /* KeapAPIBot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeapAPIBot.m; sourceTree = "<group>"; };
 		EAD2262B1C71C29A00F23DAF /* KeapUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeapUser.h; sourceTree = "<group>"; };
 		EAD2262C1C71C29A00F23DAF /* KeapUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeapUser.m; sourceTree = "<group>"; };
+		EAD2262F1C75A53600F23DAF /* KeapChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeapChat.swift; sourceTree = "<group>"; };
+		EAD226481C75A6AC00F23DAF /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = "Pods/../build/Debug-iphoneos/AWSCore.framework"; sourceTree = "<group>"; };
+		EAD226491C75A6AC00F23DAF /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "Pods/../build/Release-iphoneos/AWSS3.framework"; sourceTree = "<group>"; };
+		EAD2264A1C75A6AC00F23DAF /* SocketIOClientSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIOClientSwift.framework; path = "Pods/../build/Debug-iphoneos/SocketIOClientSwift.framework"; sourceTree = "<group>"; };
+		EAD2264E1C75AA8300F23DAF /* Keap-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Keap-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -446,12 +459,24 @@
 				74366EA7158AAE0F00A17D8A /* UIKit.framework in Frameworks */,
 				74366EA9158AAE0F00A17D8A /* Foundation.framework in Frameworks */,
 				74366EAB158AAE1000A17D8A /* CoreGraphics.framework in Frameworks */,
+				C2E16B1EE0EB539EF99DE320 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		261081CEC62CDE528A4FD7E5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2B1051A9DDCA09FA4499637A /* Pods-Keap.debug.xcconfig */,
+				70D50D092841CE53D8C9C8D2 /* Pods-Keap.release.xcconfig */,
+				1592B8A9880C57F1F41BA5BE /* Pods.debug.xcconfig */,
+				92541999F340DE9A7B81E1E0 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		741203C415900A3C00820BE9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +596,7 @@
 				74366EAD158AAE1000A17D8A /* Supporting Files */,
 				74366EA5158AAE0F00A17D8A /* Frameworks */,
 				74366EA3158AAE0F00A17D8A /* Products */,
+				261081CEC62CDE528A4FD7E5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -585,6 +611,9 @@
 		74366EA5158AAE0F00A17D8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EAD226481C75A6AC00F23DAF /* AWSCore.framework */,
+				EAD226491C75A6AC00F23DAF /* AWSS3.framework */,
+				EAD2264A1C75A6AC00F23DAF /* SocketIOClientSwift.framework */,
 				33C638EE1C520B8F000F3A3B /* MessageUI.framework */,
 				143C2CDE182058B900DFCD05 /* FacebookSDK.framework */,
 				143C2CDC18203DBB00DFCD05 /* Parse.framework */,
@@ -604,6 +633,8 @@
 				74366EC2158AAF7E00A17D8A /* SystemConfiguration.framework */,
 				74366EA6158AAE0F00A17D8A /* UIKit.framework */,
 				74366EC9158AB00E00A17D8A /* QuartzCore.framework */,
+				B68B2605CA40D7EF8132DDB0 /* Pods_Keap.framework */,
+				78817CF6C066DED2D42B01C9 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -752,6 +783,8 @@
 				EAD2262C1C71C29A00F23DAF /* KeapUser.m */,
 				EAD226281C6FF91100F23DAF /* KeapAPIBot.h */,
 				EAD226291C6FF91100F23DAF /* KeapAPIBot.m */,
+				EAD2262F1C75A53600F23DAF /* KeapChat.swift */,
+				EAD2264E1C75AA8300F23DAF /* Keap-Bridging-Header.h */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -763,9 +796,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74366EBA158AAE1000A17D8A /* Build configuration list for PBXNativeTarget "Keap" */;
 			buildPhases = (
+				E9DE15D55401A641A00D300E /* Check Pods Manifest.lock */,
 				74366E9E158AAE0F00A17D8A /* Sources */,
 				74366E9F158AAE0F00A17D8A /* Frameworks */,
 				74366EA0158AAE0F00A17D8A /* Resources */,
+				D5805F96E05C64541F633CAC /* Embed Pods Frameworks */,
+				505E8859298BC28A1AF36C38 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -782,7 +818,8 @@
 		74366E99158AAE0F00A17D8A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
 			};
 			buildConfigurationList = 74366E9C158AAE0F00A17D8A /* Build configuration list for PBXProject "Keap" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -942,6 +979,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		505E8859298BC28A1AF36C38 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5805F96E05C64541F633CAC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9DE15D55401A641A00D300E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		74366E9E158AAE0F00A17D8A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -952,6 +1037,7 @@
 				33FED0721C0D3A6200A4B211 /* DescripTableViewCell.m in Sources */,
 				335F2AF61C2FCEAA00ACA454 /* MessagesViewController.m in Sources */,
 				74366EB7158AAE1000A17D8A /* AppDelegate.m in Sources */,
+				EAD226301C75A53600F23DAF /* KeapChat.swift in Sources */,
 				33DE69A61C01B8A0009847D8 /* BidTableViewCell.m in Sources */,
 				33DC18901C2C9D5B002AD7D6 /* UserInfoViewController.m in Sources */,
 				3325B0C91BF46C8300EACEB1 /* TutorialMainViewController.m in Sources */,
@@ -1004,12 +1090,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hana Hyder (XSUKXK98Z9)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1017,10 +1113,14 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "875d4ee0-b584-4ec1-a695-7d810011ff5b";
 				SDKROOT = iphoneos;
 			};
@@ -1030,17 +1130,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hana Hyder (KP8HLU7BW5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "875d4ee0-b584-4ec1-a695-7d810011ff5b";
 				SDKROOT = iphoneos;
@@ -1050,8 +1162,9 @@
 		};
 		74366EBB158AAE1000A17D8A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1592B8A9880C57F1F41BA5BE /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1059,25 +1172,32 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					/Users/fjm/git/SampleAppsPrivate/LoginAndSignUpTutorial,
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LogInAndSignUpDemo/Keap-Prefix.pch";
 				INFOPLIST_FILE = "LogInAndSignUpDemo/Keap-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lsqlite3.0",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = Hana.KeapHen;
 				PRODUCT_NAME = Keap;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LogInAndSignUpDemo/Keap-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		74366EBC158AAE1000A17D8A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92541999F340DE9A7B81E1E0 /* Pods.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1085,17 +1205,22 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					/Users/fjm/git/SampleAppsPrivate/LoginAndSignUpTutorial,
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LogInAndSignUpDemo/Keap-Prefix.pch";
 				INFOPLIST_FILE = "LogInAndSignUpDemo/Keap-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lsqlite3.0",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = Hana.KeapHen;
 				PRODUCT_NAME = Keap;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LogInAndSignUpDemo/Keap-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
