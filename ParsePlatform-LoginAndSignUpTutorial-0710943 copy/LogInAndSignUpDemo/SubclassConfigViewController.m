@@ -12,7 +12,14 @@
 #import "WelcomeViewController.h"
 #import "KeapMainViewController.h"
 #import "KeapUser.h"
+#import "KeapAPIBot.h"
 //#import "TutorialMainViewController.h"
+
+@interface SubclassConfigViewController ()
+
+@property (strong, nonatomic) KeapAPIBot *apiBot;
+
+@end
 
 @implementation SubclassConfigViewController
 
@@ -123,6 +130,8 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    self.apiBot = [KeapAPIBot botWithDelegate:self];
+    
     // Check if user is logged in
 //    if (![PFUser currentUser]) {        
 //        // Customize the Log In View Controller
@@ -185,11 +194,18 @@
 
 // Sent to the delegate to determine whether the log in request should be submitted to the server.
 - (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
-    if (username && password && username.length && password.length) {
-        return YES;
-    }
-    
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the information!", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+    [self.apiBot loginUserWithEmail:username password:password username:username completion:^(KeapAPISuccessType result, NSDictionary *response) {
+        if (result == success) {
+            NSLog(@"%s successfully logged in user",__FUNCTION__);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        NSLog(@"%s response: %@",__FUNCTION__, response);
+    }];
+//    if (username && password && username.length && password.length) {
+//        return YES;
+//    }
+//    
+//    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the information!", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
     return NO;
 }
 

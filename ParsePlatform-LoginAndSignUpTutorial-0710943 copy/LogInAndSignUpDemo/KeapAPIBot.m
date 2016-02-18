@@ -80,7 +80,18 @@ NSString *userInfoKey     = @"userInfo";
     NSLog(@"%s storing user information from JSON %@",__FUNCTION__, user);
     [KeapUser currentUser];
     [KeapUser setEmail:[user objectForKey:@"email"]];
-    [KeapUser setFullname:[user objectForKey:@"firstName"][0]];
+    @try {
+        
+        // !!!!! this shit gets unicoded on python side for login sequence only. it looks like this: @"[u'Django']"
+        [KeapUser setFullname:[user objectForKey:@"firstName"][0]];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+        [KeapUser setFullname:[user objectForKey:@"firstName"]];
+    }
+    @finally {
+        //
+    }
     [KeapUser setPassword:[user objectForKey:@"password"]];
     [KeapUser setUsername:[user objectForKey:@"username"]];
 }
@@ -167,6 +178,9 @@ NSString *userInfoKey     = @"userInfo";
     @catch (NSException *exception)
     {
         NSLog(@"exception is %@",exception);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(errorR, @{});
+        });
     }
     @finally
     {
@@ -209,11 +223,25 @@ NSString *userInfoKey     = @"userInfo";
                 NSDictionary *momentsData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
                 NSLog(@"node array is %@",momentsData);
                 
-                completion(success, momentsData);
+                if ([[momentsData objectForKey:@"success"] isEqualToString:@"success"]) {
+                    NSMutableDictionary *dictWithPassword = [NSMutableDictionary dictionaryWithDictionary:momentsData];
+                    [dictWithPassword setObject:password forKey:@"password"];
+                    [KeapAPIBot storeUserInformationFromJSON:dictWithPassword];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(success, momentsData);
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(errorR, @{});
+                    });
+                }
                 
             }
             @catch (NSException *exception) {
                 NSLog(@"issue trying to post is %@",exception);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(errorR, @{});
+                });
             }
             @finally {
                 NSLog(@"finally n shit");
@@ -223,6 +251,9 @@ NSString *userInfoKey     = @"userInfo";
     @catch (NSException *exception)
     {
         NSLog(@"exception is %@",exception);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(errorR, @{});
+        });
     }
     @finally
     {
