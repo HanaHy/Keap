@@ -13,6 +13,7 @@
 #import "UserInfoViewController.h"
 #import "SearchViewController.h"
 #import "MessagesViewController.h"
+#import "Keap-Swift.h"
 
 @interface KeapMainViewController ()
 
@@ -82,6 +83,7 @@
   
   //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   
+    [KeapChat client];
 
 }
 
