@@ -10,6 +10,6 @@
 #define Keap_Bridging_Header_h
 
 #import "KeapUser.h"
-
+#import "KeapAPIBot.h"
 
 #endif /* Keap_Bridging_Header_h */

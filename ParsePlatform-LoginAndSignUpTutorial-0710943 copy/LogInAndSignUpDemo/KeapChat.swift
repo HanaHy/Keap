@@ -55,7 +55,7 @@ class KeapChat: NSObject {
             
         }
         
-        socket.on("noc update") {data, ack in
+        socket.on("noc connected") {data, ack in
             print("data: \(data)")
             
         }

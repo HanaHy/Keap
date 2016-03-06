@@ -50,15 +50,18 @@
   [vc4.view addSubview:view];*/
   
   
-  UIViewController *vc4 = [[MessagesViewController alloc] initWithNibName:@"MessagesViewController" bundle:nil];
-  vc4.title = @"4";
+//  UIViewController *vc4 = [[MessagesViewController alloc] initWithNibName:@"MessagesViewController" bundle:nil];
+//  vc4.title = @"4";
+    
+    UINavigationController *chatViewController = [[UIStoryboard storyboardWithName:@"Chat" bundle:nil] instantiateInitialViewController];
+    chatViewController.title = @"4";
   
   UIViewController *vc5 = [[UserInfoViewController alloc] initWithNibName:@"UserInfoViewController" bundle:nil];//[[UIViewController alloc] init];
   vc5.title = @"5";
   //vc5.view.backgroundColor = [UIColor purpleColor];
   
   UITabBarController *tabBar = [[UITabBarController alloc] init];
-  tabBar.viewControllers = @[vc1,vc2, vc3, vc4, vc5];
+  tabBar.viewControllers = @[vc1,vc2, vc3, chatViewController, vc5];
   
   tabBar.selectedIndex   = 0;
   tabBar.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
