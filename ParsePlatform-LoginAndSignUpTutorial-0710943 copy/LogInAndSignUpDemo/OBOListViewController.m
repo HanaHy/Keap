@@ -13,6 +13,7 @@
 #import "DescripTableViewCell.h"
 #import "CategPickTableViewCell.h"
 #import "PricePickTableViewCell.h"
+#import "KeapAPIBot.h"
 
 #ifdef __IPHONE_6_0
 # define ALIGN_CENTER NSTextAlignmentCenter
@@ -25,6 +26,9 @@
 /*#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)*/
 
 @interface OBOListViewController ()
+
+@property (strong, nonatomic) KeapAPIBot *apiBot;
+@property (strong, nonatomic) dispatch_queue_t apiThread;
 
 @end
 
@@ -60,12 +64,36 @@
   
   [self.view addGestureRecognizer:tap];*/
   oldSize = self.view.frame;
+    
+    self.apiThread = dispatch_queue_create("obo.api", DISPATCH_QUEUE_SERIAL);
+    self.apiBot = [KeapAPIBot botWithDelegate:self];
   
 }
 
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+    dispatch_async(self.apiThread, ^{
+        [self.apiBot fetchCategoriesWithCompletion:^(KeapAPISuccessType result, NSDictionary *response) {
+            if (result == success) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.categories = [response objectForKey:@"categories"];
+                    [self.userList reloadData];
+                });
+            }
+            NSLog(@"%s %@",__FUNCTION__, response);
+        }];
+    });
 }
 
 #pragma mark - Table view data source
@@ -142,25 +170,6 @@
     
     pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(((self.view.frame.size.width) - 320)/2, 25, 320, 200)];
     [pickerView setDelegate:self];
-    
-    categories = [[NSMutableArray alloc] init];
-    [categories addObject:@"Accessories"];
-    [categories addObject:@"Bikes & Auto"];
-    
-    [categories addObject:@"Clothing"];
-    [categories addObject:@"DC Swipes"];
-    
-    [categories addObject:@"Electronics"];
-    [categories addObject:@"Furniture"];
-    [categories addObject:@"Gardening"];
-    [categories addObject:@"Kitchen"];
-    //[categories addObject:@"Labor & Moving"];
-    [categories addObject:@"Outdoor & Recreation"];
-    [categories addObject:@"Pets & Supply"];
-    [categories addObject:@"School Supplies"];
-    [categories addObject:@"Textbooks"];
-    [categories addObject:@"Tickets"];
-    [categories addObject:@"Other"];
     
     [cell addSubview:pickerView];
     
@@ -247,12 +256,12 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-  return 14;
+  return self.categories.count;
 }
 
 -(NSString*) pickerView:(UIPickerView*)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-  return [categories objectAtIndex:row];
+  return [self.categories objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
@@ -265,7 +274,7 @@
    [[PFUser currentUser] setObject:[dataArray objectAtIndex:row] forKey:@"school"];
    [[PFUser currentUser] saveInBackground]; //-- In future may comment this line out ?*/
   
-  category = [categories objectAtIndex:row];
+  self.category = [self.categories objectAtIndex:row];
   
 }
 
@@ -282,68 +291,46 @@
   {
     NSLog(@"REACHED HERE ***");
     bool pass = true;
-    
-    PFObject *listing = [PFObject objectWithClassName:@"Listings"];
-    [listing setObject:[PFUser currentUser].objectId forKey:@"ownerID"];
-    [listing setObject:[PFUser currentUser][@"school"] forKey:@"school"];
-    
-    /* SAVING NAME AND DESCRIPTION */
-    
-    DescripTableViewCell *cell = (id)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    
-    NSString *t2 = [[cell itemName] text];
-    
-    if([t2 length] == 0)
-    {
-      pass = false;
-      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Item Name Missing" message:@"Your listing is missing the name!" delegate:nil cancelButtonTitle:@"Oops!" otherButtonTitles:nil, nil];
       
-      [alert show];
+      DescripTableViewCell *cell = (id)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
       
-      return;
+      NSString *t2 = [[cell itemName] text];
       
-    }
-    [listing setObject:t2 forKey:@"itemName"];
-    [listing setObject:[[cell itemDescrip] text] forKey:@"description"];
-    
-    
-    /* SAVING PRICE */
-    
-    PricePickTableViewCell *theCell = (id)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-    //UITextField *cellTextField = [theCell itemPrice];
-    
-    NSString *temp = [[theCell itemPrice] text];
-    if([temp length] == 0)
-    {
-      pass = false;
-      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Item Price Missing" message:@"Your listing is missing the price!" delegate:nil cancelButtonTitle:@"Oops!" otherButtonTitles:nil, nil];
+      if([t2 length] == 0)
+      {
+          pass = false;
+          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Item Name Missing" message:@"Your listing is missing the name!" delegate:nil cancelButtonTitle:@"Oops!" otherButtonTitles:nil, nil];
+          
+          [alert show];
+          
+          return;
+          
+      }
       
-      [alert show];
+      /* SAVING PRICE */
       
-      return;
+      PricePickTableViewCell *theCell = (id)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+      //UITextField *cellTextField = [theCell itemPrice];
       
-    }
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *myNumber = [f numberFromString:temp];
-    
-    [listing setObject:myNumber forKey:@"price"];
-    
-    [listing setObject:category forKey:@"category"];
-    [listing setObject:@YES forKey:@"isAvailable"];
-    [listing setObject:[NSNumber numberWithInt:0] forKey:@"bids"];
-    if(mess == 1)
-    {
-      [listing setObject:@NO forKey:@"OBO"];
-    }
-    else
-    {
-      [listing setObject:@YES forKey:@"OBO"];
-    }
-    
-    //DO THE ITEM NAME, DESCRIP AND PHOTO :-)
-    if(pass)
-      [listing save];
+      NSString *temp = [[theCell itemPrice] text];
+      if([temp length] == 0)
+      {
+          pass = false;
+          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Item Price Missing" message:@"Your listing is missing the price!" delegate:nil cancelButtonTitle:@"Oops!" otherButtonTitles:nil, nil];
+          
+          [alert show];
+          
+          return;
+          
+      }
+      NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+      f.numberStyle = NSNumberFormatterDecimalStyle;
+      NSNumber *myNumber = [f numberFromString:temp];
+      
+      
+      [self.apiBot createListing:t2 category:self.category price:myNumber description:[[cell itemDescrip] text] image:[UIImage imageNamed:@"ImageFrame.png"] withCompletion:^(KeapAPISuccessType result, NSDictionary *response) {
+          NSLog(@"%s response is %@",__FUNCTION__,response);
+      }];
     
     if(mess == 2) {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Listing Posted" message:@"Your item has now been posted! You will be notified of any bids or messages." delegate:nil cancelButtonTitle:@"Ok, got it!" otherButtonTitles:nil, nil];
@@ -477,22 +464,6 @@
   self.view.frame = rect;
   
   [UIView commitAnimations];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  // register for keyboard notifications
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(keyboardWillShow)
-                                               name:UIKeyboardWillShowNotification
-                                             object:nil];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(keyboardWillHide)
-                                               name:UIKeyboardWillHideNotification
-                                             object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

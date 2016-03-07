@@ -51,6 +51,10 @@
     
     self.apiBot = [KeapAPIBot botWithDelegate:self];
     self.apiThread = dispatch_queue_create("listfeed.api", DISPATCH_QUEUE_SERIAL);
+    
+    self.qArray = [NSArray new];
+    
+    self.newsListings = [self.view viewWithTag:5];
   
   /*CGRect tabFrame = self.tabBar.frame; //self.TabBar is IBOutlet of your TabBar
    tabFrame.size.height = 75;
@@ -92,7 +96,7 @@
                     // There are no listings for this school
                 }
                 NSLog(@"%s %@",__FUNCTION__, listings);
-                qArray = listings;
+                self.qArray = [NSArray arrayWithArray:listings];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.newsListings reloadData];
                 });
@@ -107,12 +111,17 @@
 }
 
 #pragma mark - TableView Implementation
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //  PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
 //  [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
 //  return [query countObjects];
 //  // return 2;
-    return [qArray count];
+    return [self.qArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -142,24 +151,23 @@
     
   
   //cell.itemName.text = @"temp";
-  NSInteger i = indexPath.row;
-  PFObject *temp = ((PFObject *)(qArray[i]));
-  cell.itemName.text = temp[@"itemName"];
+    NSDictionary *listing = [self.qArray objectAtIndex:indexPath.row];
+  cell.itemName.text = listing[@"name"];
   cell.itemName.adjustsFontSizeToFitWidth = YES;
-  PFFile *fil = temp[@"image"];
-  cell.itemImage.image = [UIImage imageWithData:[fil getData]];
-  //  self.headerImageView.layer.cornerRadius = 50.0f;
-  //self.headerImageView.layer.masksToBounds = YES;
+    
   cell.itemImage.layer.cornerRadius = 5.0f;
-  cell.itemImage.layer.masksToBounds = YES;
-  cell.itemDescrip.text = temp[@"description"];
+  cell.itemImage.clipsToBounds = YES;
+    
+  cell.itemDescrip.text = listing[@"description"];
+    
+    NSNumberFormatter *f = [NSNumberFormatter new];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *price = [f numberFromString:listing[@"price"]];
   
-  if(temp[@"price"] == [NSNumber numberWithInt:0])
-  {
-    cell.price.text = [NSString stringWithFormat:@"%@", @"FREE"];
-  }
-  else {
-    cell.price.text = [NSString stringWithFormat:@"$%@",temp[@"price"]];
+  if(price.integerValue == 0) {
+    cell.price.text = @"FREE";
+  } else {
+    cell.price.text = [NSString stringWithFormat:@"$%@",price];
   }
   
   cell.price.adjustsFontSizeToFitWidth  = YES;

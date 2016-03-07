@@ -592,6 +592,7 @@ withCompletion:(void (^)(KeapAPISuccessType result, NSDictionary *response))comp
     [postxhashList setObject:prodDescription forKey:@"description"];
     [postxhashList setObject:[[KeapUser currentUser] school] forKey:@"schoolex"];
     [postxhashList setObject:[[KeapUser currentUser] username] forKey:@"owner"];
+    [postxhashList setObject:@[] forKey:@"images"];
     
     /*
      
