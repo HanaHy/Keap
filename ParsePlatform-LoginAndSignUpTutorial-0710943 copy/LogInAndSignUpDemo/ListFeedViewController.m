@@ -207,11 +207,12 @@
 /* DONE */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  PFObject *temp = ((PFObject *)qArray[indexPath.row]);
+  //PFObject *temp = ((PFObject *)qArray[indexPath.row]);
   
-  itObId = temp.objectId;
+  //itObId = temp.objectId;
   ItemDetailViewController *vc = [[ItemDetailViewController alloc] init];
-  vc.itemObjectID   = itObId;
+  //vc.itemObjectID   = itObId;
+  vc.itemInfo       = self.qArray[indexPath.row];
   [self.navigationController pushViewController:vc animated:YES];
   
   

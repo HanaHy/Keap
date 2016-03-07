@@ -7,11 +7,16 @@
 //
 
 #import "ItemDetailViewController.h"
-#import <Parse/Parse.h>
+#import "KeapAPIBot.h"
+#import "KeapUser.h"
+/*#import <Parse/Parse.h>*/
 #import <QuartzCore/QuartzCore.h>
 
 
 @interface ItemDetailViewController ()
+
+@property (strong, nonatomic) KeapAPIBot *apiBot;
+@property (nonatomic) dispatch_queue_t apiThread;
 
 @end
 
@@ -37,22 +42,25 @@
   _userName.textColor = _allColor;
   
   
-  PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
-  [query whereKey:@"objectId" equalTo:_itemObjectID];
-  PFObject *temp = (PFObject *)[query getFirstObject];
-  _itemName.text = temp[@"itemName"];
+  //PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
+  //[query whereKey:@"objectId" equalTo:_itemObjectID];
+  //PFObject *temp = (PFObject *)[query getFirstObject];
+  _itemName.text = [self.itemInfo objectForKey:@"name"]; //temp[@"itemName"];
   _itemName.adjustsFontSizeToFitWidth = YES;
-  PFFile *fil = temp[@"image"];
-  _itemImage.image = [UIImage imageWithData:[fil getData]];
-  _category.text = temp[@"category"];
+  //PFFile *fil = temp[@"image"];
+  //_itemImage.image = [UIImage imageWithData:[fil getData]];
+  _category.text = [self.itemInfo objectForKey:@"category"];
   _category.adjustsFontSizeToFitWidth = YES;
-  _itemDescrip.text = temp[@"description"];
+  _itemDescrip.text = [self.itemInfo objectForKey:@"description"];
   
-  _canBid = [temp[@"OBO"] boolValue];
+ // _canBid = [temp[@"OBO"] boolValue];
 
+  _canBid = true;
+  
   if(_canBid)
   {
-  _bidNumber.text = [NSString stringWithFormat:@"%@ ACTIVE BIDS", temp[@"bids"]];
+ // _bidNumber.text = [NSString stringWithFormat:@"%@ ACTIVE BIDS", temp[@"bids"]];
+    _bidNumber.text = @"# OF ACTIVE BIDS";
   }
   else
   {
@@ -62,7 +70,7 @@
   
   /* DISABLE BID/BUY BUTTON IF IT IS THE USER'S */
   
-  if([temp[@"ownerID"] isEqualToString:[PFUser currentUser].objectId])
+  if([[self.itemInfo objectForKey:@"username"] isEqualToString:[[KeapUser currentUser] username]])
   {
     NSLog(@"***** TRUE");
     _bidButton.enabled = NO;
@@ -70,25 +78,28 @@
   }
   
   
-  NSString *dateString = [NSDateFormatter localizedStringFromDate:temp.createdAt
+ /* NSString *dateString = [NSDateFormatter localizedStringFromDate:temp.createdAt
                                                         dateStyle:NSDateFormatterShortStyle
-                                                        timeStyle:NSDateFormatterShortStyle];
+                                                        timeStyle:NSDateFormatterShortStyle];*/
+  NSString *dateString = @"00:00:00 0/0/2016";
   _date.text = dateString;
   _date.adjustsFontSizeToFitWidth = YES;
-  [_bidPrice setTitle:[NSString stringWithFormat:@"$%@",temp[@"price"]] forState:UIControlStateNormal];
-  _val = [temp[@"price"] intValue];
+  [_bidPrice setTitle:[NSString stringWithFormat:@"$%@",[self.itemInfo objectForKey:@"price"]] forState:UIControlStateNormal];
+  _val = [[self.itemInfo objectForKey:@"username"] intValue];
   // [_bidPrice frame].size = CGSizeMake(50,50);
   CGRect buttonFrame = _bidPrice.frame;
   buttonFrame.size = CGSizeMake(50, 50);  // I CAN'T FIX THE SIZE :(
   _bidPrice.frame = buttonFrame;
-  NSString *owner = temp[@"ownerID"];
-  _ownerID  = temp[@"ownerID"];
-  PFQuery *q = [PFUser query];
-  [q whereKey:@"objectId" equalTo:owner];
-  PFObject *userInf = (PFObject *)[q getFirstObject];
-  _userName.text = userInf[@"additional"];
+  //NSString *owner = [self.itemInfo objectForKey:@"owner"];
+ // _ownerID  = temp[@"ownerID"];
+  //PFQuery *q = [PFUser query];
+  //[q whereKey:@"objectId" equalTo:owner];
+  //PFObject *userInf = (PFObject *)[q getFirstObject];
+  NSDictionary *ownerInfo = [self.itemInfo objectForKey:@"owner"];
+  _userName.text = [NSString stringWithFormat:@"%@ %@", [ownerInfo objectForKey:@"firstName"], [ownerInfo objectForKey:@"lastName"]];
   _userName.adjustsFontSizeToFitWidth = YES;
-  _userSchool.text = userInf[@"school"];
+  NSDictionary *schoolInfo = [self.itemInfo objectForKey:@"school"];
+  _userSchool.text = [schoolInfo objectForKey:@"name"];
   _userSchool.adjustsFontSizeToFitWidth = YES;
   
 
@@ -96,6 +107,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  self.apiBot = [KeapAPIBot botWithDelegate:self];
+  self.apiThread = dispatch_queue_create("itemdetail.apibot", DISPATCH_QUEUE_SERIAL);
     // Do any additional setup after loading the view from its nib.
 }
 

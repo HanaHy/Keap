@@ -28,6 +28,8 @@
 @property (nonatomic, strong) IBOutlet UIButton *backButton;
 @property (nonatomic, strong) IBOutlet UIView   *headerBG;
 
+@property (nonatomic)         NSDictionary* itemInfo;
+
 
 @property (nonatomic)         NSString*     itemObjectID;
 @property (nonatomic)         UIColor*       allColor;
