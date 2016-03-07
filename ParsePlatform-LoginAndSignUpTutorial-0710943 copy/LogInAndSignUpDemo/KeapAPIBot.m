@@ -80,6 +80,8 @@ NSString *userInfoKey     = @"userInfo";
     NSLog(@"%s storing user information from JSON %@",__FUNCTION__, user);
     [KeapUser currentUser];
     [KeapUser setEmail:[user objectForKey:@"email"]];
+    [KeapUser setSchool:[[user objectForKey:@"school"] objectForKey:@"extension"]];
+    [KeapUser setNeedsSchoolEmail:NO];
     @try {
         
         // !!!!! this shit gets unicoded on python side for login sequence only. it looks like this: @"[u'Django']"

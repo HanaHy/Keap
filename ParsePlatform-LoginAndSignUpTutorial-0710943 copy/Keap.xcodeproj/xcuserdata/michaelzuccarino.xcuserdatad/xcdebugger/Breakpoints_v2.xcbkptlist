@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogInAndSignUpDemo/KeapAPIBot.m"
-            timestampString = "477474864.643801"
+            timestampString = "479006220.416119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "+storeUserInformationFromJSON:"
             landmarkType = "5">
          </BreakpointContent>
