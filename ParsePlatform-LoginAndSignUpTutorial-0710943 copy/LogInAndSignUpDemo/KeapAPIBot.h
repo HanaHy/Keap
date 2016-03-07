@@ -84,7 +84,9 @@ typedef NS_ENUM(NSInteger, KeapAPISuccessType) {
 - (void)getAllBidsForUser:(NSString *)user
            withCompletion:(void (^)(KeapAPISuccessType result, NSDictionary *response))completion;
 
-
-
+// enter a bid for a particular listing id
+- (void)makeABidForListingID:(NSString *)listingID
+                    forPrice:(NSNumber *)offer
+              withCompletion:(void (^)(KeapAPISuccessType result, NSDictionary *response))completion ;
 
 @end

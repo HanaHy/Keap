@@ -151,28 +151,48 @@
   //[someTextView release];
   //[alert release];
   
-  if(_canBid)
-  {
-  UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Place Bid" message:[NSString stringWithFormat:@"Current bid is at $%i", _val] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-  [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
-  
-  // Change keyboard type
-  [[dialog textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeNumberPad];
-  
-  dialog.tag = 100;
-  
-  [dialog show];
+//  if(_canBid)
+//  {
+//  UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Place Bid" message:[NSString stringWithFormat:@"Current bid is at $%i", _val] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+//  [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
+//  
+//  // Change keyboard type
+//  [[dialog textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeNumberPad];
+//  
+//  dialog.tag = 100;
+//  
+//  [dialog show];
+//    
+//  }
+//  else
+//  {
+//    UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Confirm Purchase" message:[NSString stringWithFormat:@"Confirm that you would like to buy this item for $%i", _val] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+//    
+//    dialog.tag = 200;
+//    
+//    [dialog show];
+//  }
+//  //[dialog release];
     
-  }
-  else
-  {
-    UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Confirm Purchase" message:[NSString stringWithFormat:@"Confirm that you would like to buy this item for $%i", _val] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Place Bid" message:[NSString stringWithFormat:@"Current bid is at %@",[self.itemInfo objectForKey:@"price"]] preferredStyle:UIAlertControllerStyleAlert];
     
-    dialog.tag = 200;
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
     
-    [dialog show];
-  }
-  //[dialog release];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Place Bid" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //
+        NSNumberFormatter *f = [NSNumberFormatter new];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber *price = [f numberFromString:[alertController textFields][0].text];
+        [self.apiBot makeABidForListingID:self.itemInfo[@"id"] forPrice:price withCompletion:^(KeapAPISuccessType result, NSDictionary *response) {
+            NSLog(@"%s Make a bid response %@",__FUNCTION__, response);
+        }];
+    }]];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Enter Bid Here";
+    }];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
   
 }
 
