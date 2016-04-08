@@ -7,9 +7,12 @@
 //
 
 #import "UserBidsViewController.h"
-#import "PersonalTableViewCell.h"
+//#import "PersonalTableViewCell.h"
+#import "NewsTableViewCell.h"
 #import <Parse/Parse.h>
 #import <QuartzCore/QuartzCore.h>
+#import "KeapAPIBot.h"
+#import "KeapUser.h"
 
 
 #ifdef __IPHONE_6_0
@@ -20,6 +23,9 @@
 
 @interface UserBidsViewController ()
 
+@property (strong, nonatomic) KeapAPIBot *apiBot;
+@property (strong, nonatomic) dispatch_queue_t apiThread;
+
 @end
 
 @implementation UserBidsViewController
@@ -29,9 +35,26 @@
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:YES];
   
-  qArray = [NSMutableArray array];
+  self.apiBot = [KeapAPIBot botWithDelegate:self];
+  self.apiThread = dispatch_queue_create("userbids.api", DISPATCH_QUEUE_SERIAL);
   
-  PFQuery *query = [PFQuery queryWithClassName:@"Bids"];
+  //self.qArray = [NSArray new];
+
+  self.userListings = [self.view viewWithTag:5];
+  
+  /*UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Back"];
+  self.bar.items = [NSArray arrayWithObject:item];
+  self.bar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonTouchHandler:)];
+  */
+  //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style: UIBarButtonItemStyleBordered target:self action:@selector(Back)];
+  //UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonTouchHandler:)];
+  //self.bar.leftBarButtonItem = backButton;
+  //self.navigationItem.leftBarButtonItem = backButton;
+  
+  //self.bar.backItem
+  // = [[UIBarButtonItem alloc]initWithTitle:@"Details" style:UIBarButtonSystemItemDone target:nil action:@selector(backButtonTouchHandler:)];
+  
+  /*PFQuery *query = [PFQuery queryWithClassName:@"Bids"];
   [query whereKey:@"requester" equalTo:[PFUser currentUser].objectId];
   [query orderByDescending:@"updatedAt"];
   numOfBids = [query countObjects];
@@ -52,7 +75,7 @@
     [self.view addSubview:sadness];
     userListings.alpha = 0;
   }
-  
+  */
   
 }
 
@@ -62,6 +85,28 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+  dispatch_async(self.apiThread, ^{
+    [self.apiBot getAllBidsForUser:[[KeapUser currentUser] username] withCompletion:^(KeapAPISuccessType result, NSDictionary *response) {
+      //
+      if (result == success) {
+        NSArray *bids = [response objectForKey:@"bids"];
+        if ([bids count] == 0) {
+          // The user has no bids.
+          /* DISPLAY THE SAD FLOWER SQUIRREL */
+        }
+        NSLog(@"%s %@",__FUNCTION__, bids);
+        self.qArray = [[NSArray alloc] initWithArray:bids];//[response allValues];
+        //self.qArray = [NSArray arrayWithArray:bids];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self.userListings reloadData];
+        });
+      }
+    }];
+  });
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -69,8 +114,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if(indexPath.row == 0)
+  /*if(indexPath.row == 0)
   {
+   
+   UNNECESSARY! MAKING THIS A PROPER NAVIGATION BAR IN XIB
     
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     
@@ -96,15 +143,20 @@
     return cell;
   }
   else
+  {*/
+  NewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newFriendCell"];
+  
+  if(!cell)
   {
-    PersonalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"persCell"];
-    
-    if(!cell)
-    {
-      [tableView registerNib:[UINib nibWithNibName:@"PersonalTableViewCell" bundle:nil] forCellReuseIdentifier:@"persCell"];
-      cell = [tableView dequeueReusableCellWithIdentifier:@"persCell"];
-    }
-    
+    [tableView registerNib:[UINib nibWithNibName:@"NewsTableViewCell" bundle:nil] forCellReuseIdentifier:@"newFriendCell"];
+    cell = [tableView dequeueReusableCellWithIdentifier:@"newFriendCell"];
+  }
+  
+  NSDictionary *bidItem = [self.qArray objectAtIndex:indexPath.row];
+  cell.itemName.text = bidItem[@"name"];
+  cell.itemName.adjustsFontSizeToFitWidth = YES;
+
+  
     /*
      @property (nonatomic, strong) IBOutlet UILabel      *itemName;
      @property (nonatomic, strong) IBOutlet UILabel      *price;
@@ -112,7 +164,7 @@
      @property (nonatomic, strong) IBOutlet UIImageView  *img;
      */
     
-    PFObject *temp = (PFObject *)qArray[indexPath.row - 1];
+    /*PFObject *temp = (PFObject *)qArray[indexPath.row - 1];
    
     NSString *f = temp[@"listingID"];
     PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
@@ -121,22 +173,22 @@
     //NSLog(@"F THIS %@", item);
     
     cell.itemName.text = item[@"itemName"];
-   /* cell.name.text = item[@"itemName"]; */
+    cell.name.text = item[@"itemName"];
    // cell.price.text = temp[@"bidPrice"];
     //NSLog(@"%@****", temp[@"bidPrice"]);
     cell.price.text = [NSString stringWithFormat:@"$%@",temp[@"bidPrice"]];
-    
-   if([temp[@"isAccepted"] boolValue] == true)
+    */
+   if([bidItem[@"isAccepted"] boolValue] == true)
     {
-      cell.status.text = @"Accepted";
-      cell.status.textColor = [UIColor colorWithRed:0.306 green:0.709 blue:0 alpha:1.0];
+      cell.itemDescrip.text = @"Accepted";
+      cell.itemDescrip.textColor = [UIColor colorWithRed:0.306 green:0.709 blue:0 alpha:1.0];
       cell.price.textColor = [UIColor colorWithRed:0.306 green:0.709 blue:0 alpha:1.0];
       
     }
     else
     {
-      cell.status.text = @"Pending";
-      cell.status.textColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+      cell.itemDescrip.text = @"Pending";
+      cell.itemDescrip.textColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
     }
     
     
@@ -150,32 +202,45 @@
      cell.img.layer.masksToBounds = YES;
      */
     
-    PFFile *fil = item[@"image"];
+    /*PFFile *fil = item[@"image"];
     cell.img.image = [UIImage imageWithData:[fil getData]];
     
     cell.img.layer.cornerRadius = 10.0f;
     cell.img.layer.masksToBounds  = YES;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    */
     return cell;
-  }
+  //}
   
-  return nil;
+ // return nil;
 }
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   //NSLog(@"itemBidNumber is: %ld", (long)itemBidNumber);
-  return numOfBids + 1;
+  //NSLog(@"******THE NUM IS: %ld", [self.qArray count]);
+  
+  if([self.qArray count] == 0)
+  {
+    
+    int imageHeight = [UIScreen mainScreen].bounds.size.width*[UIImage imageNamed:@"no_listings_image.png"].size.height/[UIImage imageNamed:@"no_listings_image.png"].size.width;
+    UIImageView *sadness = [[UIImageView alloc] initWithFrame:CGRectMake(0, ([UIScreen mainScreen].bounds.size.height - imageHeight)/2, [UIScreen mainScreen].bounds.size.width, imageHeight)];
+    sadness.image = [UIImage imageNamed:@"no_listings_image.png"];
+    
+    [self.view addSubview:sadness];
+    //[tableView setHidden:YES];
+    tableView.separatorColor = [UIColor clearColor];
+  }
+  return [self.qArray count];
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
   return (indexPath.row == 0) ? 44.0f : 146.0f;
-}
+}*/
 
 - (IBAction)backButtonTouchHandler:(id)sender {
   
@@ -184,10 +249,6 @@
   
   //[self.parentViewController.navigationController popViewControllerAnimated:YES];
   
-}
-
--(BOOL)prefersStatusBarHidden{
-  return YES;
 }
 /*
 #pragma mark - Navigation

@@ -17,8 +17,9 @@
 }
 
 @property (nonatomic, retain) UITableView *userListings;
-@property (nonatomic, retain) NSMutableArray       *qArray;
+@property (nonatomic, retain) NSArray       *qArray;
 @property (nonatomic)         NSInteger       numOfBids;
+@property (nonatomic, strong) IBOutlet UINavigationBar  *bar;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
