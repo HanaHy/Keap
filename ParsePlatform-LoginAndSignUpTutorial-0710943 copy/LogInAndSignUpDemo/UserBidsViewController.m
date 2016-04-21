@@ -14,12 +14,15 @@
 #import "KeapAPIBot.h"
 #import "KeapUser.h"
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 #ifdef __IPHONE_6_0
 # define ALIGN_CENTER NSTextAlignmentCenter
 #else
 # define ALIGN_CENTER UITextAlignmentCenter
 #endif
+
+
 
 @interface UserBidsViewController ()
 
@@ -30,17 +33,24 @@
 
 @implementation UserBidsViewController
 
-@synthesize qArray, userListings, numOfBids;
+//@synthesize qArray, userListings, numOfBids;
 
-- (void) viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:YES];
+- (void)viewDidLoad {
+  [super viewDidLoad];
   
   self.apiBot = [KeapAPIBot botWithDelegate:self];
   self.apiThread = dispatch_queue_create("userbids.api", DISPATCH_QUEUE_SERIAL);
   
-  //self.qArray = [NSArray new];
+  self.qArray = [NSArray new];
+  
+ // self.userListings = [self.view viewWithTag:7]; //idk what this does
+  
+  // Do any additional setup after loading the view from its nib.
+}
 
-  self.userListings = [self.view viewWithTag:5];
+- (void) viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:YES];
+  
   
   /*UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Back"];
   self.bar.items = [NSArray arrayWithObject:item];
@@ -79,13 +89,9 @@
   
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-  
-    // Do any additional setup after loading the view from its nib.
-}
 
 - (void)viewDidAppear:(BOOL)animated {
+  //[super viewDidAppear:YES];
   dispatch_async(self.apiThread, ^{
     [self.apiBot getAllBidsForUser:[[KeapUser currentUser] username] withCompletion:^(KeapAPISuccessType result, NSDictionary *response) {
       //
@@ -93,17 +99,25 @@
         NSArray *bids = [response objectForKey:@"bids"];
         if ([bids count] == 0) {
           // The user has no bids.
-          /* DISPLAY THE SAD FLOWER SQUIRREL */
+          // DISPLAY THE SAD FLOWER SQUIRREL
         }
         NSLog(@"%s %@",__FUNCTION__, bids);
-        self.qArray = [[NSArray alloc] initWithArray:bids];//[response allValues];
+        self.qArray   = [NSArray arrayWithArray:bids];
+        NSLog(@"************in ViewDidAppear %ld", [self.qArray count]);
+        //self.qArray = [[NSArray alloc] initWithArray:bids];//[response allValues];
         //self.qArray = [NSArray arrayWithArray:bids];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
           [self.userListings reloadData];
+          
+         // NSIndexSet * sections = [NSIndexSet indexSetWithIndex:0];
+          //[self.userListings reloadSections:sections withRowAnimation:UITableViewRowAnimationNone];
         });
       }
     }];
   });
+ // [self.userListings reloadData];
+ 
 }
 
 
@@ -111,6 +125,28 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)setCellColor:(UIColor *)color ForCell:(UITableViewCell *)cell {
+  cell.contentView.backgroundColor = color;
+  cell.backgroundColor = color;
+}
+
+#pragma mark - TableView Implementation
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  //  PFQuery *query = [PFQuery queryWithClassName:@"Listings"];
+  //  [query whereKey:@"school" equalTo:[PFUser currentUser][@"school"]];
+  //  return [query countObjects];
+  //  // return 2;
+  NSLog(@"************in numberOfRowsInSection %ld", [self.qArray count]);
+  return [self.qArray count];
+  //return 3;
+}
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -151,7 +187,7 @@
     [tableView registerNib:[UINib nibWithNibName:@"NewsTableViewCell" bundle:nil] forCellReuseIdentifier:@"newFriendCell"];
     cell = [tableView dequeueReusableCellWithIdentifier:@"newFriendCell"];
   }
-  
+//  
   NSDictionary *bidItem = [self.qArray objectAtIndex:indexPath.row];
   cell.itemName.text = bidItem[@"name"];
   cell.itemName.adjustsFontSizeToFitWidth = YES;
@@ -190,7 +226,7 @@
       cell.itemDescrip.text = @"Pending";
       cell.itemDescrip.textColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
     }
-    
+  
     
     
     /*
@@ -210,6 +246,8 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     */
+  
+  //[self setCellColor:[UIColor redColor] ForCell:cell];
     return cell;
   //}
   
@@ -217,7 +255,7 @@
 }
 
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+/*-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   //NSLog(@"itemBidNumber is: %ld", (long)itemBidNumber);
   //NSLog(@"******THE NUM IS: %ld", [self.qArray count]);
@@ -233,8 +271,11 @@
     //[tableView setHidden:YES];
     tableView.separatorColor = [UIColor clearColor];
   }
-  return [self.qArray count];
-}
+ // return [self.qArray count];
+  NSLog(@"************in numberOfRowsInSection %ld", [self.qArray count]);
+  return 3;
+}*/
+
 
 /*- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

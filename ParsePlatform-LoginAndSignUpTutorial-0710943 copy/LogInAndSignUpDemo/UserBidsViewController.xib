@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserBidsViewController">
             <connections>
+                <outlet property="userListings" destination="B3u-md-dFN" id="ZDW-Yy-rom"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,14 +16,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="B3u-md-dFN">
-                    <rect key="frame" x="0.0" y="62" width="600" height="538"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="reZ-N9-JLt"/>
-                        <outlet property="delegate" destination="-1" id="YZu-9v-Zpg"/>
-                    </connections>
-                </tableView>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y73-Gt-zed">
                     <rect key="frame" x="0.0" y="18" width="600" height="44"/>
                     <color key="barTintColor" red="0.62352941176470589" green="0.87058823529411766" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -43,6 +36,14 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="B3u-md-dFN">
+                    <rect key="frame" x="0.0" y="62" width="600" height="538"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="RkQ-xk-L8A"/>
+                        <outlet property="delegate" destination="-1" id="k3r-ea-MBT"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="0.62352941176470589" green="0.87058823529411766" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>

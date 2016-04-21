@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserBidsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface UserBidsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
   
-  UITableView *userListings;
-  NSMutableArray *qArray;
-  NSInteger     numOfBids;
+  //UITableView *userListings;
+  //NSArray *qArray;
+  //NSInteger     numOfBids;
 
-}
 
-@property (nonatomic, retain) UITableView *userListings;
-@property (nonatomic, retain) NSArray       *qArray;
+@property (nonatomic, weak) IBOutlet UITableView *userListings;
+@property (nonatomic, strong) NSArray       *qArray;
 @property (nonatomic)         NSInteger       numOfBids;
 @property (nonatomic, strong) IBOutlet UINavigationBar  *bar;
 
