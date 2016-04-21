@@ -24,7 +24,7 @@
                     </textAttributes>
                     <items>
                         <navigationItem title="Your Bids" id="v0l-6Y-aPV">
-                            <barButtonItem key="leftBarButtonItem" image="back_button_fit.png" id="yCY-gO-003">
+                            <barButtonItem key="leftBarButtonItem" image="backbutton.png" style="plain" id="yCY-gO-003">
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="backButtonTouchHandler:" destination="-1" id="HHb-er-r1l"/>
@@ -58,6 +58,6 @@
         </view>
     </objects>
     <resources>
-        <image name="back_button_fit.png" width="22" height="22"/>
+        <image name="backbutton.png" width="22" height="22"/>
     </resources>
 </document>
