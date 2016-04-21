@@ -283,9 +283,9 @@
   } //Alert that popped was the user bid.
 }
 
--(BOOL)prefersStatusBarHidden{
-  return YES;
-}
+//-(BOOL)prefersStatusBarHidden{
+//  return YES;
+//}
 
 
 @end
