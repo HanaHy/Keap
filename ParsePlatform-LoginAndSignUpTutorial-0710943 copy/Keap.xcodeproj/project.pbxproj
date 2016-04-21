@@ -106,6 +106,7 @@
 		339BAB3F1C2CBE7A009BBBBB /* SearchGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339BAB3D1C2CBE7A009BBBBB /* SearchGridViewController.xib */; };
 		339BAB431C2DF787009BBBBB /* ItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339BAB411C2DF787009BBBBB /* ItemCollectionViewCell.m */; };
 		339BAB441C2DF787009BBBBB /* ItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 339BAB421C2DF787009BBBBB /* ItemCollectionViewCell.xib */; };
+		339CD2BD1CC885E90029DCC9 /* back_button_fit.png in Resources */ = {isa = PBXBuildFile; fileRef = 339CD2BC1CC885E90029DCC9 /* back_button_fit.png */; };
 		33B0367A1C442A5E004CC239 /* sign_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 33B036791C442A5E004CC239 /* sign_up.png */; };
 		33B0367C1C442A68004CC239 /* sign_up_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 33B0367B1C442A68004CC239 /* sign_up_down.png */; };
 		33C638EF1C520B8F000F3A3B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C638EE1C520B8F000F3A3B /* MessageUI.framework */; };
@@ -319,6 +320,7 @@
 		339BAB401C2DF787009BBBBB /* ItemCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCollectionViewCell.h; sourceTree = "<group>"; };
 		339BAB411C2DF787009BBBBB /* ItemCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCollectionViewCell.m; sourceTree = "<group>"; };
 		339BAB421C2DF787009BBBBB /* ItemCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		339CD2BC1CC885E90029DCC9 /* back_button_fit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button_fit.png; sourceTree = "<group>"; };
 		33B036791C442A5E004CC239 /* sign_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sign_up.png; sourceTree = "<group>"; };
 		33B0367B1C442A68004CC239 /* sign_up_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sign_up_down.png; sourceTree = "<group>"; };
 		33C638EE1C520B8F000F3A3B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -498,6 +500,7 @@
 		741203C415900A3C00820BE9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				339CD2BC1CC885E90029DCC9 /* back_button_fit.png */,
 				33DE69931C01A285009847D8 /* back_button.png */,
 				338D26421C37AB3200782065 /* buy_button.png */,
 				33DE69971C01A4C9009847D8 /* bid_button.png */,
@@ -1028,6 +1031,7 @@
 				336A8D371C3926840042CF55 /* frame_36.gif in Resources */,
 				336A8CDE1C3926490042CF55 /* frame_2.gif in Resources */,
 				336A8D2B1C3926840042CF55 /* frame_24.gif in Resources */,
+				339CD2BD1CC885E90029DCC9 /* back_button_fit.png in Resources */,
 				336A8D2C1C3926840042CF55 /* frame_25.gif in Resources */,
 				33DE69961C01A4B9009847D8 /* contact_button.png in Resources */,
 				33012BF71C05B5CE000FB0FE /* PostListingViewController.xib in Resources */,

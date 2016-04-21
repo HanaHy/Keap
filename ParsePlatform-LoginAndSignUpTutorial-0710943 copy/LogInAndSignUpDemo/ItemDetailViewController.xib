@@ -40,7 +40,7 @@
                         <constraint firstAttribute="height" constant="24" id="H07-pd-T1H"/>
                         <constraint firstAttribute="width" constant="24" id="XjZ-vB-Is4"/>
                     </constraints>
-                    <state key="normal" image="white_back_button.png">
+                    <state key="normal" image="back_button_fit.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -206,9 +206,9 @@
         </view>
     </objects>
     <resources>
+        <image name="back_button_fit.png" width="22" height="22"/>
         <image name="bid_button.png" width="243" height="68"/>
         <image name="contact_button.png" width="243" height="68"/>
         <image name="temp1.png" width="200" height="200"/>
-        <image name="white_back_button.png" width="40" height="40"/>
     </resources>
 </document>
