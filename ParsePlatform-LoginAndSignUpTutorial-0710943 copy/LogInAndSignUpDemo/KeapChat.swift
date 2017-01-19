@@ -29,7 +29,7 @@ class KeapChat: NSObject {
     
     var delegate:KeapChatClient?
     
-    let socket = SocketIOClient(socketURL: NSURL(string: "http://54.67.2.39:3000")!, options: [.Log(true), .ForceWebsockets(true)])
+    let socket = SocketIOClient(socketURL: NSURL(string: "http://52.8.201.8:3000")!, options: [.Log(true), .ForceWebsockets(true)])
     
     override init() {
         
