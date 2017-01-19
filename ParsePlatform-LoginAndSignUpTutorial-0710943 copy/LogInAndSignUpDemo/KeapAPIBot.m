@@ -28,7 +28,7 @@
  )
 */
 
-#define kSERVERADDRESS       "http://54.67.2.39:80/"
+#define kSERVERADDRESS       "http://52.8.201.8:80/"
 #define kLOGIN               "login/"
 #define kSIGNUP              "signup/"
 #define kUPDATE_SCHOOL       "update/school/"
