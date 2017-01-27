@@ -86,7 +86,7 @@
   
   //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   
-    [KeapChat client];
+ //   [KeapChat client]; commented by noa
 
 }
 

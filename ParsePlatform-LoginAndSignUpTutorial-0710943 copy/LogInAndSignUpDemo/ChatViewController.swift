@@ -20,34 +20,34 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.chatTableView.registerNib(UINib(nibName: "ChatLeftCell", bundle: nil), forCellReuseIdentifier: "chatLeftCell")
-        self.chatTableView.registerNib(UINib(nibName: "ChatRightCell", bundle: nil), forCellReuseIdentifier: "chatRightCell")
+        self.chatTableView.register(UINib(nibName: "ChatLeftCell", bundle: nil), forCellReuseIdentifier: "chatLeftCell")
+        self.chatTableView.register(UINib(nibName: "ChatRightCell", bundle: nil), forCellReuseIdentifier: "chatRightCell")
         
         self.apiBot = KeapAPIBot(delegate: self)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatMessages.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("chatLeftCell", forIndexPath: indexPath) as! ChatCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "chatLeftCell", for: indexPath) as! ChatCell
         
         return cell
     }
 
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
 

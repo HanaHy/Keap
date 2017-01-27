@@ -18,32 +18,32 @@ class InboxViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.inboxTableView.registerNib(UINib(nibName: "ChatTabViewCell", bundle: nil), forCellReuseIdentifier: "inboxCell")
+        self.inboxTableView.register(UINib(nibName: "ChatTabViewCell", bundle: nil), forCellReuseIdentifier: "inboxCell")
         self.apiBot = KeapAPIBot(delegate: self)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        self.apiBot?.getMessageHistoryForUser(KeapUser.currentUser().username, withCompletion: { (result, responseDictionary) -> Void in
+    override func viewDidAppear(_ animated: Bool) {
+        self.apiBot?.getMessageHistory(forUser: KeapUser.current().username, withCompletion: { (result, responseDictionary) -> Void in
             print("MESSAGE INBOX: \(responseDictionary)")
         })
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("inboxCell", forIndexPath: indexPath) as! InboxViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "inboxCell", for: indexPath) as! InboxViewCell
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
 

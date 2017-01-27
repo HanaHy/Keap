@@ -1,35 +1,35 @@
 //
 //  KeapChat.swift
-//  Keap
+//  Keap changed by noa
 //
 //  Created by Michael Zuccarino on 2/17/16.
 //
 //
-
+/*
 import UIKit
 import SocketIOClientSwift
 
 enum ChatConnectStatus {
-    case NotConnected
-    case Connecting
-    case Connected
-    case NewMessage
+    case notConnected
+    case connecting
+    case connected
+    case newMessage
 }
 
 protocol KeapChatClient {
-    func receivedChatMessage(data:[String: Any])
-    func updateChatClientStatus(status:ChatConnectStatus)
+    func receivedChatMessage(_ data:[String: Any])
+    func updateChatClientStatus(_ status:ChatConnectStatus)
 }
 
 class KeapChat: NSObject {
     
     static let client = KeapChat()
     
-    var connectionStatus:ChatConnectStatus = .NotConnected
+    var connectionStatus:ChatConnectStatus = .notConnected
     
     var delegate:KeapChatClient?
     
-    let socket = SocketIOClient(socketURL: NSURL(string: "http://54.67.2.39:3000")!, options: [.Log(true), .ForceWebsockets(true)])
+//    let socket = SocketIOClient(socketURL: URL(string: "http://54.67.2.39:3000")!, options: [.log(true), .forceWebsockets(true)]) CHANGED BY NOA
     
     override init() {
         
@@ -37,17 +37,17 @@ class KeapChat: NSObject {
         
         socket.on("connect") {data, ack in
             print("socket connected")
-            self.delegate?.updateChatClientStatus(.Connecting)
+            self.delegate?.updateChatClientStatus(.connecting)
         }
         
         socket.on("initializeConnect") {data, ack in
             print("data: \(data)")
-            self.socket.emit("handshakeauth", ["nochandle":KeapUser.currentUser().username, "fullname":KeapUser.currentUser().fullname])
+            self.socket.emit("handshakeauth", ["nochandle":KeapUser.current().username, "fullname":KeapUser.current().fullname])
         }
         
         socket.on("handshakecomplete") {data, ack in
             print("data: \(data)")
-            self.delegate?.updateChatClientStatus(.Connected)
+            self.delegate?.updateChatClientStatus(.connected)
         }
         
         socket.on("noclist update") {data, ack in
@@ -68,7 +68,7 @@ class KeapChat: NSObject {
         
         socket.on("chat incoming") {data, ack in
             print("data: \(data)")
-            self.delegate?.updateChatClientStatus(.NewMessage)
+            self.delegate?.updateChatClientStatus(.newMessage)
         }
         
         socket.on("noc typing event") {data, ack in
@@ -78,20 +78,20 @@ class KeapChat: NSObject {
         
         socket.on("disconnect") {data, ack in
             print("data: \(data)")
-            self.delegate?.updateChatClientStatus(.NotConnected)
+            self.delegate?.updateChatClientStatus(.notConnected)
         }
         
         
         socket.connect()
     }
     
-    func sendMessage(user:String, message:String) {
-        socket.emit("chat sent", ["noc":KeapUser.currentUser().username,"target":user,"message":message])
+    func sendMessage(_ user:String, message:String) {
+        socket.emit("chat sent", ["noc":KeapUser.current().username,"target":user,"message":message])
     }
     
-}
+}*/ //everything before was uncommented
 
-/*
+/* already commented
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
