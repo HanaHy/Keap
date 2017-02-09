@@ -99,10 +99,17 @@
 
 /**
  @abstract Returns all objects in the query result set.
- @discussion Invoking this method will cache all objects in the paginated result set.
+ @discussion Invoking this method will cache all objects in the result set.
  @return All objects in the query result set.
  */
 @property  (nullable, nonatomic, readonly) NSOrderedSet *allObjects;
+
+/**
+ @abstract Returns all objects in the paginated query result set.
+ @discussion Invoking this method will cache all objects in the paginated result set.
+ @return All objects in the paginated query result set.
+ */
+@property  (nullable, nonatomic, readonly) NSOrderedSet *paginatedObjects;
 
 /**
  @abstract Returns the object for the given index path from the result set.

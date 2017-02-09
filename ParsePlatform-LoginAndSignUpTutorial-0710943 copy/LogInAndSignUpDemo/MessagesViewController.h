@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import <SendBirdSDK/SendBirdSDK.h>
 
 @interface MessagesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
   

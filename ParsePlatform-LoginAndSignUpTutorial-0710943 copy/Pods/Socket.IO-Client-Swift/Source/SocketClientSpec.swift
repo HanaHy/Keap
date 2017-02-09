@@ -21,7 +21,7 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-
+/*
 protocol SocketClientSpec: class {
     var nsp: String { get set }
     var waitingData: [SocketPacket] { get set }
@@ -40,4 +40,4 @@ extension SocketClientSpec {
         
         handleEvent("error", data: [reason], isInternalMessage: true, withAck: -1)
     }
-}
+}*/

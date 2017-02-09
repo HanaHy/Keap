@@ -182,6 +182,7 @@
 		747F007915951A58000F601E /* FacebookDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 747F006D15951A58000F601E /* FacebookDown.png */; };
 		747F008015951A58000F601E /* Twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 747F007415951A58000F601E /* Twitter.png */; };
 		747F008115951A58000F601E /* TwitterDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 747F007515951A58000F601E /* TwitterDown.png */; };
+		B63A6A00409CEB9C6DAAB788 /* Pods_Keap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3895DCBEFB5204BCF1E525E /* Pods_Keap.framework */; };
 		C4BBB7B516FD2ABC003CA3F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4BBB7B316FD2ABC003CA3F7 /* CoreLocation.framework */; };
 		C4BBB7B616FD2ABC003CA3F7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4BBB7B416FD2ABC003CA3F7 /* StoreKit.framework */; };
 		C4BBB7BA16FD2B0F003CA3F7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4BBB7B716FD2B0F003CA3F7 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -383,6 +384,7 @@
 		33FED07A1C0D612800A4B211 /* SBarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBarTableViewCell.m; sourceTree = "<group>"; };
 		33FED07B1C0D612800A4B211 /* SBarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBarTableViewCell.xib; sourceTree = "<group>"; };
 		33FED07E1C0D758800A4B211 /* iOSWelcomeScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iOSWelcomeScreen.png; sourceTree = "<group>"; };
+		6CCA7A889B27477CBB583D91 /* Pods-Keap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keap.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keap/Pods-Keap.release.xcconfig"; sourceTree = "<group>"; };
 		74366EA2158AAE0F00A17D8A /* Keap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74366EA6158AAE0F00A17D8A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		74366EA8158AAE0F00A17D8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -420,6 +422,7 @@
 		747F007415951A58000F601E /* Twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Twitter.png; sourceTree = "<group>"; };
 		747F007515951A58000F601E /* TwitterDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterDown.png; sourceTree = "<group>"; };
 		78817CF6C066DED2D42B01C9 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C6143581BB9FA8A0D4DC5E /* Pods-Keap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keap/Pods-Keap.debug.xcconfig"; sourceTree = "<group>"; };
 		C4BBB7B316FD2ABC003CA3F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C4BBB7B416FD2ABC003CA3F7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C4BBB7B716FD2B0F003CA3F7 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -449,6 +452,7 @@
 		EAD226491C75A6AC00F23DAF /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "Pods/../build/Release-iphoneos/AWSS3.framework"; sourceTree = "<group>"; };
 		EAD2264A1C75A6AC00F23DAF /* SocketIOClientSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIOClientSwift.framework; path = "Pods/../build/Debug-iphoneos/SocketIOClientSwift.framework"; sourceTree = "<group>"; };
 		EAD2264E1C75AA8300F23DAF /* Keap-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Keap-Bridging-Header.h"; sourceTree = "<group>"; };
+		F3895DCBEFB5204BCF1E525E /* Pods_Keap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Keap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -475,6 +479,7 @@
 				74366EA7158AAE0F00A17D8A /* UIKit.framework in Frameworks */,
 				74366EA9158AAE0F00A17D8A /* Foundation.framework in Frameworks */,
 				74366EAB158AAE1000A17D8A /* CoreGraphics.framework in Frameworks */,
+				B63A6A00409CEB9C6DAAB788 /* Pods_Keap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +607,7 @@
 				74366EAD158AAE1000A17D8A /* Supporting Files */,
 				74366EA5158AAE0F00A17D8A /* Frameworks */,
 				74366EA3158AAE0F00A17D8A /* Products */,
+				F71065B38C43837855B1D3F1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -639,6 +645,7 @@
 				74366EA6158AAE0F00A17D8A /* UIKit.framework */,
 				74366EC9158AB00E00A17D8A /* QuartzCore.framework */,
 				78817CF6C066DED2D42B01C9 /* Pods.framework */,
+				F3895DCBEFB5204BCF1E525E /* Pods_Keap.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -834,6 +841,15 @@
 			name = API;
 			sourceTree = "<group>";
 		};
+		F71065B38C43837855B1D3F1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A9C6143581BB9FA8A0D4DC5E /* Pods-Keap.debug.xcconfig */,
+				6CCA7A889B27477CBB583D91 /* Pods-Keap.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -841,9 +857,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74366EBA158AAE1000A17D8A /* Build configuration list for PBXNativeTarget "Keap" */;
 			buildPhases = (
+				35FEED412547AC3528ADF70F /* [CP] Check Pods Manifest.lock */,
 				74366E9E158AAE0F00A17D8A /* Sources */,
 				74366E9F158AAE0F00A17D8A /* Frameworks */,
 				74366EA0158AAE0F00A17D8A /* Resources */,
+				4B28C56762CA770D472F2488 /* [CP] Embed Pods Frameworks */,
+				C0BCC2A47D77A8987ED463AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1032,6 +1051,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		35FEED412547AC3528ADF70F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4B28C56762CA770D472F2488 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Keap/Pods-Keap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0BCC2A47D77A8987ED463AD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Keap/Pods-Keap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		74366E9E158AAE0F00A17D8A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1172,6 +1239,7 @@
 		};
 		74366EBB158AAE1000A17D8A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9C6143581BB9FA8A0D4DC5E /* Pods-Keap.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1205,6 +1273,7 @@
 		};
 		74366EBC158AAE1000A17D8A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CCA7A889B27477CBB583D91 /* Pods-Keap.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

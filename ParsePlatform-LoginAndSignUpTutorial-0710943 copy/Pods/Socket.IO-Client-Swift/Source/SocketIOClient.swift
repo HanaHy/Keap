@@ -21,7 +21,7 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-
+/*
 import Foundation
 
 public final class SocketIOClient: NSObject, SocketEngineClient, SocketParsable {
@@ -517,4 +517,4 @@ extension SocketIOClient {
     func emitTest(event: String, _ data: AnyObject...) {
         self._emit([event] + data)
     }
-}
+}*/

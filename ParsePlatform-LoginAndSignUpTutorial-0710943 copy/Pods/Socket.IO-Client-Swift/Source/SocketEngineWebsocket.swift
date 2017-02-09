@@ -22,7 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-
+/*
 import Foundation
 
 /// Protocol that is used to implement socket.io WebSocket support
@@ -61,4 +61,4 @@ extension SocketEngineWebsocket {
     public func websocketDidReceiveData(socket: WebSocket, data: NSData) {
         parseEngineData(data)
     }
-}
+}*/

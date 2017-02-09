@@ -10,7 +10,7 @@
 //  This code is in the public domain from:
 //  https://github.com/johnno1962/SwiftRegex
 //
-
+/*
 import Foundation
 
 infix operator <~ { associativity none precedence 130 }
@@ -192,4 +192,4 @@ func <~ (left: SwiftRegex, right: String) -> String {
         return left.regex.replacementStringForResult( match,
             inString: left.target as String, offset: 0, template: right )
         }, options: [])
-}
+}*/

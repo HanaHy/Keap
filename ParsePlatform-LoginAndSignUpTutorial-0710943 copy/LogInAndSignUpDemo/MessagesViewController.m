@@ -1,4 +1,4 @@
-//
+ //
 //  MessagesViewController.m
 //  Keap
 //
@@ -8,7 +8,7 @@
 
 #import "MessagesViewController.h"
 #import "MessagesTableViewCell.h"
-
+#import <LayerKit/LayerKit.h>
 #ifdef __IPHONE_6_0
 # define ALIGN_CENTER NSTextAlignmentCenter
 #else
@@ -111,7 +111,7 @@
 - (IBAction)newButtonTouchHandler:(id)sender {
   
   [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Please Forgive Me", nil) message:[NSString stringWithFormat:@"Sorry guys, currently still developing this feature! %C", 0xe108] delegate:nil cancelButtonTitle:NSLocalizedString(@"I forgive you.", nil) otherButtonTitles:nil] show];
-  
+    
   //[self.navigationController popViewControllerAnimated:YES];
   // [self dismissViewControllerAnimated:YES completion:nil];
   

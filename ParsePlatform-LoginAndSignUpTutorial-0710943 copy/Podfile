@@ -1,8 +1,10 @@
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
+# Uncomment this line if you're using Swift
+ use_frameworks!
 
-pod 'Socket.IO-Client-Swift'
-pod 'AWSS3'
-pod 'AWSCore'
-
+target 'Keap' do
+  pod 'SendBirdSDK'
+  pod 'LayerKit'
+  pod 'Socket.IO-Client-Swift'
+  pod 'AWSS3'
+  pod 'AWSCore'
+end

@@ -22,7 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-
+/*
 import Foundation
 
 @objc public protocol SocketEngineSpec {
@@ -112,4 +112,4 @@ extension SocketEngineSpec {
     func send(msg: String, withData datas: [NSData]) {
         write(msg, withType: .Message, withData: datas)
     }
-}
+}*/

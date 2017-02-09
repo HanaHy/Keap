@@ -22,7 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-
+/*
 import Foundation
 
 @objc public protocol SocketEngineClient {    
@@ -31,4 +31,4 @@ import Foundation
     optional func engineDidOpen(reason: String)
     func parseEngineMessage(msg: String)
     func parseEngineBinaryData(data: NSData)
-}
+}*/

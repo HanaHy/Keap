@@ -25,7 +25,7 @@ CREATE TABLE "conversations" (
   deleted_at DATETIME,
   object_identifier TEXT UNIQUE NOT NULL,
   version INT NOT NULL
-, has_unread_messages INTEGER NOT NULL DEFAULT 0, is_distinct INTEGER NOT NULL DEFAULT 0, type INTEGER NOT NULL DEFAULT 1, deletion_mode INTEGER DEFAULT 0, total_message_count INTEGER NOT NULL DEFAULT 0, unread_message_count INTEGER NOT NULL DEFAULT 0);
+, has_unread_messages INTEGER NOT NULL DEFAULT 0, is_distinct INTEGER NOT NULL DEFAULT 0, type INTEGER NOT NULL DEFAULT 1, deletion_mode INTEGER DEFAULT 0, total_message_count INTEGER NOT NULL DEFAULT 0, unread_message_count INTEGER NOT NULL DEFAULT 0, participants_hash TEXT);
 
 CREATE TABLE "deleted_message_parts" (
   database_identifier INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -200,7 +200,7 @@ CREATE TABLE "streams" (
   deleted_at DATETIME, 
   min_synced_seq INTEGER, 
   max_synced_seq INTEGER, metadata_timestamp INTEGER, is_distinct INTEGER NOT NULL DEFAULT 0
-, type INTEGER NOT NULL DEFAULT 1, total_message_event_count INTEGER NOT NULL DEFAULT 0, unread_message_event_count INTEGER NOT NULL DEFAULT 0, least_recent_unread_message_event_seq INTEGER, last_message_event_received_at DATETIME, last_message_event_seq INTEGER, deletion_mode INTEGER DEFAULT 0, starting_seq INTEGER, mutation_seq INTEGER, created_at DATETIME);
+, type INTEGER NOT NULL DEFAULT 1, total_message_event_count INTEGER NOT NULL DEFAULT 0, unread_message_event_count INTEGER NOT NULL DEFAULT 0, least_recent_unread_message_event_seq INTEGER, last_message_event_received_at DATETIME, last_message_event_seq INTEGER, deletion_mode INTEGER DEFAULT 0, starting_seq INTEGER, mutation_seq INTEGER, created_at DATETIME, members_hash TEXT);
 
 CREATE TABLE syncable_changes (
   change_identifier INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -209,11 +209,23 @@ CREATE TABLE syncable_changes (
   change_type INTEGER NOT NULL
 );
 
-CREATE TABLE synced_changes (
+CREATE TABLE "synced_changes" (
   change_identifier INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  table_name TEXT NOT NULL,
-  row_identifier INTEGER NOT NULL,
-  change_type INTEGER NOT NULL
+  change_type INTEGER NOT NULL,
+  stream_database_identifier INTEGER,
+  mutation_database_identifier INTEGER,
+  event_database_identifier INTEGER,
+  event_content_part_database_identifier INTEGER,
+  remote_keyed_value_database_identifier INTEGER,
+  stream_member_database_identifier INTEGER,
+  associated_stream_database_identifier INTEGER NOT NULL,
+  FOREIGN KEY(stream_database_identifier) REFERENCES streams(database_identifier) ON DELETE CASCADE,
+  FOREIGN KEY(mutation_database_identifier) REFERENCES mutations(database_identifier) ON DELETE CASCADE,
+  FOREIGN KEY(event_database_identifier) REFERENCES events(database_identifier) ON DELETE CASCADE,
+  FOREIGN KEY(event_content_part_database_identifier) REFERENCES event_content_parts(database_identifier) ON DELETE CASCADE,
+  FOREIGN KEY(remote_keyed_value_database_identifier) REFERENCES remote_keyed_values(database_identifier) ON DELETE CASCADE,
+  FOREIGN KEY(stream_member_database_identifier) REFERENCES stream_members(database_identifier) ON DELETE CASCADE,
+  FOREIGN KEY(associated_stream_database_identifier) REFERENCES streams(database_identifier) ON DELETE CASCADE
 );
 
 
@@ -277,7 +289,19 @@ CREATE INDEX streams_deletion_mode_idx ON streams(deletion_mode);
 
 CREATE INDEX streams_type_idx ON streams(type);
 
-CREATE INDEX synced_changes_table_name_idx ON synced_changes(table_name);
+CREATE INDEX synced_changes_associated_stream_db_id_idx ON synced_changes(associated_stream_database_identifier);
+
+CREATE INDEX synced_changes_event_content_part_db_id_idx ON synced_changes(event_content_part_database_identifier);
+
+CREATE INDEX synced_changes_event_db_id_idx ON synced_changes(event_database_identifier);
+
+CREATE INDEX synced_changes_mutation_db_id_idx ON synced_changes(mutation_database_identifier);
+
+CREATE INDEX synced_changes_remote_keyed_value_db_id_idx ON synced_changes(remote_keyed_value_database_identifier);
+
+CREATE INDEX synced_changes_stream_db_id_idx ON synced_changes(stream_database_identifier);
+
+CREATE INDEX synced_changes_stream_member_db_id_idx ON synced_changes(stream_member_database_identifier);
 
 
 CREATE TRIGGER tombstone_duplicate_events_by_client_id
@@ -304,19 +328,19 @@ END;
 CREATE TRIGGER track_deletes_of_remote_keyed_values AFTER UPDATE OF deleted_at ON remote_keyed_values
 WHEN NEW.timestamp NOT NULL AND (NEW.deleted_at NOT NULL AND OLD.deleted_at IS NULL)
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('remote_keyed_values', OLD.database_identifier, 2);
+  INSERT INTO synced_changes(remote_keyed_value_database_identifier, change_type, associated_stream_database_identifier) VALUES (OLD.database_identifier, 2, OLD.object_id);
 END;
 
 CREATE TRIGGER track_deletes_of_stream_members AFTER UPDATE OF deleted_at ON stream_members
 WHEN NEW.deleted_at IS NOT NULL AND OLD.deleted_at IS NULL
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('stream_members', OLD._ROWID_, 2);
+  INSERT INTO synced_changes(stream_member_database_identifier, change_type, associated_stream_database_identifier) VALUES (OLD._ROWID_, 2, OLD.stream_database_identifier);
 END;
 
 CREATE TRIGGER track_deletes_of_streams AFTER UPDATE OF deletion_mode ON streams
 WHEN NEW.deletion_mode = 2
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('streams', OLD.database_identifier, 2);
+  INSERT INTO synced_changes(stream_database_identifier, change_type, associated_stream_database_identifier) VALUES (OLD.database_identifier, 2, OLD.database_identifier);
 END;
 
 CREATE TRIGGER track_deletions_of_conversations AFTER UPDATE OF deletion_mode ON conversations
@@ -328,13 +352,21 @@ END;
 CREATE TRIGGER track_event_content_part_purges AFTER UPDATE OF transfer_status ON event_content_parts
 WHEN NEW.transfer_status = 2 AND NEW.purged <> OLD.purged AND NEW.purged = 1 AND NEW.last_accessed IS NULL
 BEGIN
-    INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('event_content_parts', OLD._ROWID_, 2);
+  INSERT INTO synced_changes(event_content_part_database_identifier, change_type, associated_stream_database_identifier) VALUES (OLD._ROWID_, 2, (
+    SELECT events.stream_database_identifier FROM events
+    LEFT OUTER JOIN event_content_parts ON (events.database_identifier = event_content_parts.event_database_identifier)
+    WHERE event_content_parts.database_identifier = NEW.database_identifier
+  ));
 END;
 
 CREATE TRIGGER track_event_content_part_transfer_status_changes AFTER UPDATE OF transfer_status ON event_content_parts
 WHEN NEW.transfer_status <> OLD.transfer_status AND NEW.purged = 0
 BEGIN
-    INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('event_content_parts', OLD._ROWID_, 1);
+  INSERT INTO synced_changes(event_content_part_database_identifier, change_type, associated_stream_database_identifier) VALUES (OLD._ROWID_, 1, (
+    SELECT events.stream_database_identifier FROM events
+    LEFT OUTER JOIN event_content_parts ON (events.database_identifier = event_content_parts.event_database_identifier)
+    WHERE event_content_parts.database_identifier = NEW.database_identifier
+  ));
 END;
 
 CREATE TRIGGER track_global_deletions_of_messages AFTER UPDATE OF deletion_mode ON messages
@@ -356,19 +388,26 @@ BEGIN
   INSERT INTO syncable_changes(table_name, row_identifier, change_type) VALUES ('conversations', NEW.database_identifier, 0);
 END;
 
-CREATE TRIGGER track_inserts_of_events_delete
-AFTER INSERT ON events FOR EACH ROW
-WHEN NEW.seq IS NOT NULL AND NEW.type = 9 AND NOT EXISTS (SELECT 1 FROM events WHERE client_id = NEW.client_id AND database_identifier != NEW.database_identifier)
+CREATE TRIGGER track_inserts_of_event_mutations AFTER INSERT ON mutations
+WHEN NEW.is_synchronized = 1 AND NEW.stream_database_identifier IS NULL AND NEW.event_database_identifier IS NOT NULL
 BEGIN
-  INSERT OR IGNORE INTO synced_changes(table_name, row_identifier, change_type) VALUES ('events', (SELECT database_identifier FROM events WHERE stream_database_identifier = NEW.stream_database_identifier AND seq = NEW.target_seq), 2);
+  INSERT INTO synced_changes(mutation_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 0, (
+    SELECT events.stream_database_identifier FROM events
+    WHERE events.database_identifier = NEW.event_database_identifier
+  ));
+END;
+
+CREATE TRIGGER track_inserts_of_events_delete AFTER INSERT ON events FOR EACH ROW
+WHEN NEW.seq IS NOT NULL AND NEW.type = 9 AND NOT EXISTS (SELECT 1 FROM events WHERE client_id = NEW.client_id AND database_identifier != NEW.database_identifier) AND (SELECT database_identifier FROM events WHERE stream_database_identifier = NEW.stream_database_identifier AND seq = NEW.target_seq)
+BEGIN
+  INSERT INTO synced_changes(event_database_identifier, change_type, associated_stream_database_identifier) VALUES ((SELECT database_identifier FROM events WHERE stream_database_identifier = NEW.stream_database_identifier AND seq = NEW.target_seq), 2, NEW.stream_database_identifier);
   UPDATE events SET type = 10, subtype = NULL, external_content_id = NULL, member_id = NULL, target_seq = NULL WHERE database_identifier = (SELECT database_identifier FROM events WHERE stream_database_identifier = NEW.stream_database_identifier AND seq = NEW.target_seq);
 END;
 
-CREATE TRIGGER track_inserts_of_events_non_delete
-AFTER INSERT ON events FOR EACH ROW
+CREATE TRIGGER track_inserts_of_events_non_delete AFTER INSERT ON events FOR EACH ROW
 WHEN NEW.seq IS NOT NULL AND NEW.type != 9 AND NOT EXISTS (SELECT 1 FROM events WHERE client_id = NEW.client_id AND database_identifier != NEW.database_identifier)
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('events', NEW.database_identifier, 0);
+  INSERT INTO synced_changes(event_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 0, NEW.stream_database_identifier);
 END;
 
 CREATE TRIGGER track_inserts_of_local_keyed_values AFTER INSERT ON local_keyed_values
@@ -377,28 +416,28 @@ BEGIN
   INSERT INTO syncable_changes(table_name, row_identifier, change_type) VALUES ('local_keyed_values', NEW.database_identifier, 0);
 END;
 
-CREATE TRIGGER track_inserts_of_mutations AFTER INSERT ON mutations
-WHEN NEW.is_synchronized = 1
-BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('mutations', NEW.database_identifier, 0);
-END;
-
 CREATE TRIGGER track_inserts_of_remote_keyed_values AFTER INSERT ON remote_keyed_values
 WHEN NEW.timestamp NOT NULL
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('remote_keyed_values', NEW.database_identifier, 0);
+  INSERT INTO synced_changes(remote_keyed_value_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 0, NEW.object_id);
 END;
 
 CREATE TRIGGER track_inserts_of_stream_members AFTER INSERT ON stream_members
 WHEN NEW.seq IS NOT NULL
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('stream_members', NEW._ROWID_, 0);
+  INSERT INTO synced_changes(stream_member_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW._ROWID_, 0, NEW.stream_database_identifier);
+END;
+
+CREATE TRIGGER track_inserts_of_stream_mutations AFTER INSERT ON mutations
+WHEN NEW.is_synchronized = 1 AND NEW.stream_database_identifier IS NOT NULL
+BEGIN
+  INSERT INTO synced_changes(mutation_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 0, NEW.stream_database_identifier);
 END;
 
 CREATE TRIGGER track_inserts_of_streams AFTER INSERT ON streams
 WHEN NEW.stream_id IS NOT NULL
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('streams', NEW.database_identifier, 0);
+  INSERT INTO synced_changes(stream_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 0, NEW.database_identifier);
 END;
 
 CREATE TRIGGER track_message_send_on_insert AFTER INSERT ON messages
@@ -422,13 +461,13 @@ END;
 CREATE TRIGGER track_re_inserts_of_remote_keyed_values AFTER UPDATE OF deleted_at ON remote_keyed_values
 WHEN NEW.timestamp NOT NULL AND (NEW.deleted_at IS NULL AND OLD.deleted_at NOT NULL)
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('remote_keyed_values', NEW.database_identifier, 0);
+  INSERT INTO synced_changes(remote_keyed_value_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 0, NEW.object_id);
 END;
 
 CREATE TRIGGER track_stream_distinct_updates AFTER UPDATE OF is_distinct ON streams
 WHEN NEW.is_distinct IS NOT NULL AND OLD.is_distinct IS NOT NULL AND NEW.is_distinct != OLD.is_distinct
 BEGIN
-INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('streams', OLD.database_identifier, 1);
+  INSERT INTO synced_changes(stream_database_identifier, change_type, associated_stream_database_identifier) VALUES (OLD.database_identifier, 1, NEW.database_identifier);
 END;
 
 CREATE TRIGGER track_sync_deletions_of_messages AFTER UPDATE OF deletion_mode ON messages
@@ -446,10 +485,19 @@ BEGIN
     INSERT INTO syncable_changes(table_name, row_identifier, change_type) VALUES ('message_recipient_status', NEW.database_identifier, 0);
 END;
 
+CREATE TRIGGER track_updates_of_event_mutations AFTER UPDATE OF is_synchronized ON mutations
+WHEN NEW.is_synchronized = 1 AND OLD.is_synchronized = 0 AND NEW.stream_database_identifier IS NULL
+BEGIN
+  INSERT INTO synced_changes(mutation_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 0, (
+    SELECT events.stream_database_identifier FROM events
+    WHERE events.database_identifier = NEW.event_database_identifier
+  ));
+END;
+
 CREATE TRIGGER track_updates_of_event_seqs AFTER UPDATE OF seq ON events
 WHEN NEW.seq IS NOT NULL AND OLD.seq IS NULL
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('events', NEW.database_identifier, 1);
+  INSERT INTO synced_changes(event_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 1, NEW.stream_database_identifier);
 END;
 
 CREATE TRIGGER track_updates_of_event_type_message_to_tombstone AFTER UPDATE OF type ON events
@@ -465,40 +513,40 @@ BEGIN
   INSERT INTO syncable_changes(table_name, row_identifier, change_type) VALUES ('local_keyed_values', NEW.database_identifier, 1);
 END;
 
-CREATE TRIGGER track_updates_of_mutations AFTER UPDATE OF is_synchronized ON mutations
-WHEN NEW.is_synchronized = 1 AND OLD.is_synchronized = 0
-BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('mutations', NEW.database_identifier, 0);
-END;
-
 CREATE TRIGGER track_updates_of_remote_keyed_values AFTER UPDATE OF timestamp ON remote_keyed_values
 WHEN NEW.timestamp NOT NULL AND OLD.deleted_at IS NULL AND (NEW.value != OLD.value)
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('remote_keyed_values', NEW.database_identifier, 1);
+  INSERT INTO synced_changes(remote_keyed_value_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 1, NEW.object_id);
 END;
 
 CREATE TRIGGER track_updates_of_starting_seq AFTER UPDATE OF starting_seq ON streams
 WHEN OLD.starting_seq IS NULL AND NEW.starting_seq IS NOT NULL
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('streams', NEW.database_identifier, 1);
+  INSERT INTO synced_changes(stream_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 1, NEW.database_identifier);
 END;
 
 CREATE TRIGGER track_updates_of_stream_database_identifier_for_conversation AFTER UPDATE OF stream_database_identifier ON conversations
 WHEN (OLD.stream_id IS NULL AND NEW.stream_id IS NULL) OR OLD.stream_id = NEW.stream_id
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('streams', NEW.stream_database_identifier, 1);
+  INSERT INTO synced_changes(stream_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.stream_database_identifier, 1, NEW.stream_database_identifier);
 END;
 
 CREATE TRIGGER track_updates_of_stream_id_for_events AFTER UPDATE OF stream_database_identifier ON events
-WHEN NEW.stream_database_identifier IS NOT NULL AND OLD.stream_database_identifier IS NOT NULL AND NEW.stream_database_identifier != OLD.stream_database_identifier
+WHEN NEW.stream_database_identifier IS NOT NULL AND OLD.stream_database_identifier IS NOT NULL AND NEW.stream_database_identifier != NEW.stream_database_identifier
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('events', NEW.database_identifier, 1);
+  INSERT INTO synced_changes(event_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 1, NEW.stream_database_identifier);
+END;
+
+CREATE TRIGGER track_updates_of_stream_mutations AFTER UPDATE OF is_synchronized ON mutations
+WHEN NEW.is_synchronized = 1 AND OLD.is_synchronized = 0 AND NEW.stream_database_identifier IS NOT NULL
+BEGIN
+  INSERT INTO synced_changes(mutation_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 0, NEW.stream_database_identifier);
 END;
 
 CREATE TRIGGER track_updates_of_streams AFTER UPDATE OF stream_id ON streams
 WHEN NEW.stream_id IS NOT NULL AND OLD.stream_id IS NULL
 BEGIN
-  INSERT INTO synced_changes(table_name, row_identifier, change_type) VALUES ('streams', NEW.database_identifier, 1);
+  INSERT INTO synced_changes(stream_database_identifier, change_type, associated_stream_database_identifier) VALUES (NEW.database_identifier, 1, NEW.database_identifier);
 END;
 
 
@@ -606,3 +654,7 @@ INSERT INTO schema_migrations (version) VALUES (20160414154223977);
 INSERT INTO schema_migrations (version) VALUES (20160708161810428);
 
 INSERT INTO schema_migrations (version) VALUES (20160708161832582);
+
+INSERT INTO schema_migrations (version) VALUES (20160805151851018);
+
+INSERT INTO schema_migrations (version) VALUES (20160809124256556);

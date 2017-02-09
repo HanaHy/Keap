@@ -52,6 +52,7 @@ typedef NS_ENUM(NSUInteger, LYRClientError) {
     LYRClientErrorAsyncTimeout                      = 6004,
     LYRClientErrorInvalidIdentifier                 = 6005,
     LYRClientErrorNotConnected                      = 6006,
+    LYRClientErrorDatabaseMigrationFailure          = 6007,
     
     // Crypto Configuration Errors
     LYRClientErrorKeyPairNotFound                   = 7000,

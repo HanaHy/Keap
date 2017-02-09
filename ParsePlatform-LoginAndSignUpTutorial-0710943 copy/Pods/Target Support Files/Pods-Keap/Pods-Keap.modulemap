@@ -1,0 +1,6 @@
+framework module Pods_Keap {
+  umbrella header "Pods-Keap-umbrella.h"
+
+  export *
+  module * { export * }
+}

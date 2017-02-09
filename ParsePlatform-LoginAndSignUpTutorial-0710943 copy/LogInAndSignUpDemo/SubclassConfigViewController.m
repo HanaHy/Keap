@@ -129,7 +129,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     self.apiBot = [KeapAPIBot botWithDelegate:self];
     
     // Check if user is logged in
