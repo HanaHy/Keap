@@ -2,7 +2,10 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
+target 'Keap' do
+pod 'LayerKit'
 pod 'Socket.IO-Client-Swift'
 pod 'AWSS3'
 pod 'AWSCore'
-
+pod 'Firebase/Core'
+end

@@ -156,6 +156,7 @@
 		33FED07C1C0D612800A4B211 /* SBarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FED07A1C0D612800A4B211 /* SBarTableViewCell.m */; };
 		33FED07D1C0D612800A4B211 /* SBarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33FED07B1C0D612800A4B211 /* SBarTableViewCell.xib */; };
 		33FED07F1C0D758800A4B211 /* iOSWelcomeScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 33FED07E1C0D758800A4B211 /* iOSWelcomeScreen.png */; };
+		61486D2A6187D48132ABD5F4 /* Pods_Keap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B4A09D76B9082E887EA18 /* Pods_Keap.framework */; };
 		74366EA7158AAE0F00A17D8A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74366EA6158AAE0F00A17D8A /* UIKit.framework */; };
 		74366EA9158AAE0F00A17D8A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74366EA8158AAE0F00A17D8A /* Foundation.framework */; };
 		74366EAB158AAE1000A17D8A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74366EAA158AAE0F00A17D8A /* CoreGraphics.framework */; };
@@ -193,18 +194,9 @@
 		C4BBB7C416FD2D73003CA3F7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4BBB7C116FD2D73003CA3F7 /* Default-568h@2x.png */; };
 		C4FD613617286AC800F61563 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD613517286AC800F61563 /* Icon.png */; };
 		C4FD613817286ACD00F61563 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD613717286ACD00F61563 /* Icon@2x.png */; };
-		EABC670A1C827A2F00E6E559 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABC67091C827A2F00E6E559 /* InboxViewController.swift */; };
-		EABC670C1C827A9600E6E559 /* ChatTabViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABC670B1C827A9600E6E559 /* ChatTabViewCell.xib */; };
-		EABC670E1C827AC200E6E559 /* InboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABC670D1C827AC200E6E559 /* InboxViewCell.swift */; };
-		EABC67101C827CDD00E6E559 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EABC670F1C827CDD00E6E559 /* Chat.storyboard */; };
-		EABC67121C827ED200E6E559 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABC67111C827ED200E6E559 /* ChatViewController.swift */; };
-		EABC67141C827FE300E6E559 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABC67131C827FE300E6E559 /* ChatCell.swift */; };
-		EABC67161C82800000E6E559 /* ChatLeftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABC67151C82800000E6E559 /* ChatLeftCell.xib */; };
-		EABC67181C82806E00E6E559 /* ChatRightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABC67171C82806E00E6E559 /* ChatRightCell.xib */; };
-		EABC671A1C82832600E6E559 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABC67191C82832600E6E559 /* ChatMessage.swift */; };
+		CC8B5D7A1E601A26006E1420 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC8B5D791E601A26006E1420 /* GoogleService-Info.plist */; };
 		EAD2262A1C6FF91100F23DAF /* KeapAPIBot.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD226291C6FF91100F23DAF /* KeapAPIBot.m */; };
 		EAD2262D1C71C29A00F23DAF /* KeapUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD2262C1C71C29A00F23DAF /* KeapUser.m */; };
-		EAD226301C75A53600F23DAF /* KeapChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2262F1C75A53600F23DAF /* KeapChat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -383,6 +375,7 @@
 		33FED07A1C0D612800A4B211 /* SBarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBarTableViewCell.m; sourceTree = "<group>"; };
 		33FED07B1C0D612800A4B211 /* SBarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBarTableViewCell.xib; sourceTree = "<group>"; };
 		33FED07E1C0D758800A4B211 /* iOSWelcomeScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iOSWelcomeScreen.png; sourceTree = "<group>"; };
+		6E2B4A09D76B9082E887EA18 /* Pods_Keap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Keap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74366EA2158AAE0F00A17D8A /* Keap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74366EA6158AAE0F00A17D8A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		74366EA8158AAE0F00A17D8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -420,6 +413,8 @@
 		747F007415951A58000F601E /* Twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Twitter.png; sourceTree = "<group>"; };
 		747F007515951A58000F601E /* TwitterDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterDown.png; sourceTree = "<group>"; };
 		78817CF6C066DED2D42B01C9 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F530977D44F565522AB2360 /* Pods-Keap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keap.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keap/Pods-Keap.release.xcconfig"; sourceTree = "<group>"; };
+		C1BD40BA7B6EB77E750BEE2E /* Pods-Keap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keap/Pods-Keap.debug.xcconfig"; sourceTree = "<group>"; };
 		C4BBB7B316FD2ABC003CA3F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C4BBB7B416FD2ABC003CA3F7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C4BBB7B716FD2B0F003CA3F7 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -431,20 +426,11 @@
 		C4BBB7C116FD2D73003CA3F7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C4FD613517286AC800F61563 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		C4FD613717286ACD00F61563 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
-		EABC67091C827A2F00E6E559 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
-		EABC670B1C827A9600E6E559 /* ChatTabViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTabViewCell.xib; sourceTree = "<group>"; };
-		EABC670D1C827AC200E6E559 /* InboxViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewCell.swift; sourceTree = "<group>"; };
-		EABC670F1C827CDD00E6E559 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
-		EABC67111C827ED200E6E559 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		EABC67131C827FE300E6E559 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
-		EABC67151C82800000E6E559 /* ChatLeftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatLeftCell.xib; sourceTree = "<group>"; };
-		EABC67171C82806E00E6E559 /* ChatRightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRightCell.xib; sourceTree = "<group>"; };
-		EABC67191C82832600E6E559 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		CC8B5D791E601A26006E1420 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EAD226281C6FF91100F23DAF /* KeapAPIBot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeapAPIBot.h; sourceTree = "<group>"; };
 		EAD226291C6FF91100F23DAF /* KeapAPIBot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeapAPIBot.m; sourceTree = "<group>"; };
 		EAD2262B1C71C29A00F23DAF /* KeapUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeapUser.h; sourceTree = "<group>"; };
 		EAD2262C1C71C29A00F23DAF /* KeapUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeapUser.m; sourceTree = "<group>"; };
-		EAD2262F1C75A53600F23DAF /* KeapChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeapChat.swift; sourceTree = "<group>"; };
 		EAD226481C75A6AC00F23DAF /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = "Pods/../build/Debug-iphoneos/AWSCore.framework"; sourceTree = "<group>"; };
 		EAD226491C75A6AC00F23DAF /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "Pods/../build/Release-iphoneos/AWSS3.framework"; sourceTree = "<group>"; };
 		EAD2264A1C75A6AC00F23DAF /* SocketIOClientSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIOClientSwift.framework; path = "Pods/../build/Debug-iphoneos/SocketIOClientSwift.framework"; sourceTree = "<group>"; };
@@ -475,12 +461,22 @@
 				74366EA7158AAE0F00A17D8A /* UIKit.framework in Frameworks */,
 				74366EA9158AAE0F00A17D8A /* Foundation.framework in Frameworks */,
 				74366EAB158AAE1000A17D8A /* CoreGraphics.framework in Frameworks */,
+				61486D2A6187D48132ABD5F4 /* Pods_Keap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		374DD9FC9F7ADA8F90C76ABD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1BD40BA7B6EB77E750BEE2E /* Pods-Keap.debug.xcconfig */,
+				7F530977D44F565522AB2360 /* Pods-Keap.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		741203C415900A3C00820BE9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -602,6 +598,7 @@
 				74366EAD158AAE1000A17D8A /* Supporting Files */,
 				74366EA5158AAE0F00A17D8A /* Frameworks */,
 				74366EA3158AAE0F00A17D8A /* Products */,
+				374DD9FC9F7ADA8F90C76ABD /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -639,6 +636,7 @@
 				74366EA6158AAE0F00A17D8A /* UIKit.framework */,
 				74366EC9158AB00E00A17D8A /* QuartzCore.framework */,
 				78817CF6C066DED2D42B01C9 /* Pods.framework */,
+				6E2B4A09D76B9082E887EA18 /* Pods_Keap.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -646,6 +644,7 @@
 		74366EAC158AAE1000A17D8A /* LogInAndSignUpDemo */ = {
 			isa = PBXGroup;
 			children = (
+				CC8B5D791E601A26006E1420 /* GoogleService-Info.plist */,
 				EAD226271C6FF90100F23DAF /* API */,
 				74366EB5158AAE1000A17D8A /* AppDelegate.h */,
 				74366EB6158AAE1000A17D8A /* AppDelegate.m */,
@@ -694,7 +693,6 @@
 		74366EF6158B959200A17D8A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				EABC67051C8279B200E6E559 /* Chat */,
 				EABC67061C8279C900E6E559 /* Login/Welcome */,
 				EABC67081C8279F600E6E559 /* Tabs/Views */,
 				33CB260D1C015DBD00DF74FB /* ItemDetailViewController.h */,
@@ -706,23 +704,6 @@
 				EABC67071C8279DE00E6E559 /* TableViewCells */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		EABC67051C8279B200E6E559 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				EAD2262F1C75A53600F23DAF /* KeapChat.swift */,
-				EABC67091C827A2F00E6E559 /* InboxViewController.swift */,
-				EABC670F1C827CDD00E6E559 /* Chat.storyboard */,
-				EABC67111C827ED200E6E559 /* ChatViewController.swift */,
-				EABC67191C82832600E6E559 /* ChatMessage.swift */,
-				EABC67131C827FE300E6E559 /* ChatCell.swift */,
-				EABC67151C82800000E6E559 /* ChatLeftCell.xib */,
-				EABC67171C82806E00E6E559 /* ChatRightCell.xib */,
-				EABC670D1C827AC200E6E559 /* InboxViewCell.swift */,
-				EABC670B1C827A9600E6E559 /* ChatTabViewCell.xib */,
-			);
-			name = Chat;
 			sourceTree = "<group>";
 		};
 		EABC67061C8279C900E6E559 /* Login/Welcome */ = {
@@ -841,9 +822,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74366EBA158AAE1000A17D8A /* Build configuration list for PBXNativeTarget "Keap" */;
 			buildPhases = (
+				A8FA941943EF4BE6C648314B /* [CP] Check Pods Manifest.lock */,
 				74366E9E158AAE0F00A17D8A /* Sources */,
 				74366E9F158AAE0F00A17D8A /* Frameworks */,
 				74366EA0158AAE0F00A17D8A /* Resources */,
+				1A59FFBF81584E3CCAA92AD6 /* [CP] Embed Pods Frameworks */,
+				B878C1228AAFB131095680E7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -896,7 +880,6 @@
 				336A8D4B1C3926840042CF55 /* frame_56.gif in Resources */,
 				336A8D361C3926840042CF55 /* frame_35.gif in Resources */,
 				336A8D3C1C3926840042CF55 /* frame_41.gif in Resources */,
-				EABC670C1C827A9600E6E559 /* ChatTabViewCell.xib in Resources */,
 				33FED07D1C0D612800A4B211 /* SBarTableViewCell.xib in Resources */,
 				336A8D491C3926840042CF55 /* frame_54.gif in Resources */,
 				336A8D481C3926840042CF55 /* frame_53.gif in Resources */,
@@ -913,7 +896,6 @@
 				336A8D4F1C392AE70042CF55 /* no_listings_image.png in Resources */,
 				336A8D241C3926840042CF55 /* frame_17.gif in Resources */,
 				74366EE8158AC82C00A17D8A /* DefaultSettingsViewController.xib in Resources */,
-				EABC67181C82806E00E6E559 /* ChatRightCell.xib in Resources */,
 				336A8D2D1C3926840042CF55 /* frame_26.gif in Resources */,
 				336A8D261C3926840042CF55 /* frame_19.gif in Resources */,
 				336A8D331C3926840042CF55 /* frame_32.gif in Resources */,
@@ -950,11 +932,11 @@
 				336A8D411C3926840042CF55 /* frame_46.gif in Resources */,
 				3325B0C61BF46B3400EACEB1 /* TutorialViewController.xib in Resources */,
 				33DE69941C01A285009847D8 /* back_button.png in Resources */,
-				EABC67161C82800000E6E559 /* ChatLeftCell.xib in Resources */,
 				336A8D4D1C3926840042CF55 /* frame_58.gif in Resources */,
 				33DE69B01C01CB92009847D8 /* UserListingsViewController.xib in Resources */,
 				336A8D401C3926840042CF55 /* frame_45.gif in Resources */,
 				33012BF91C05B97D000FB0FE /* sell-background-compressed.png in Resources */,
+				CC8B5D7A1E601A26006E1420 /* GoogleService-Info.plist in Resources */,
 				33DE69981C01A4C9009847D8 /* bid_button.png in Resources */,
 				336A8D251C3926840042CF55 /* frame_18.gif in Resources */,
 				336A8D301C3926840042CF55 /* frame_29.gif in Resources */,
@@ -963,7 +945,6 @@
 				338AE1271CC9689200F12CD3 /* backbutton.png in Resources */,
 				335F2AFE1C2FD40C00ACA454 /* white_add_arrow.png in Resources */,
 				336A8D171C3926840042CF55 /* frame_4.gif in Resources */,
-				EABC67101C827CDD00E6E559 /* Chat.storyboard in Resources */,
 				336A8D1F1C3926840042CF55 /* frame_12.gif in Resources */,
 				747F008115951A58000F601E /* TwitterDown.png in Resources */,
 				336F2B6C1BE88763005CC11A /* Logo.png in Resources */,
@@ -1032,6 +1013,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1A59FFBF81584E3CCAA92AD6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Keap/Pods-Keap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A8FA941943EF4BE6C648314B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B878C1228AAFB131095680E7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Keap/Pods-Keap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		74366E9E158AAE0F00A17D8A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1042,13 +1071,11 @@
 				33FED0721C0D3A6200A4B211 /* DescripTableViewCell.m in Sources */,
 				335F2AF61C2FCEAA00ACA454 /* MessagesViewController.m in Sources */,
 				74366EB7158AAE1000A17D8A /* AppDelegate.m in Sources */,
-				EAD226301C75A53600F23DAF /* KeapChat.swift in Sources */,
 				33DE69A61C01B8A0009847D8 /* BidTableViewCell.m in Sources */,
 				33DC18901C2C9D5B002AD7D6 /* UserInfoViewController.m in Sources */,
 				3325B0C91BF46C8300EACEB1 /* TutorialMainViewController.m in Sources */,
 				3325B0BE1BF1C22500EACEB1 /* WelcomeViewController.m in Sources */,
 				33CB26101C015DBD00DF74FB /* ItemDetailViewController.m in Sources */,
-				EABC67141C827FE300E6E559 /* ChatCell.swift in Sources */,
 				33FED0571C0D281E00A4B211 /* OBOListViewController.m in Sources */,
 				3325B0D21BF4827A00EACEB1 /* KeapMainViewController.m in Sources */,
 				74366EDF158AB49300A17D8A /* DemoTableViewController.m in Sources */,
@@ -1056,9 +1083,7 @@
 				33DE69AF1C01CB92009847D8 /* UserListingsViewController.m in Sources */,
 				33CB25FE1C0157C000DF74FB /* NewsTableViewCell.m in Sources */,
 				338D26361C36043800782065 /* UserBidsViewController.m in Sources */,
-				EABC67121C827ED200E6E559 /* ChatViewController.swift in Sources */,
 				33012BF61C05B5CE000FB0FE /* PostListingViewController.m in Sources */,
-				EABC671A1C82832600E6E559 /* ChatMessage.swift in Sources */,
 				33FED0771C0D60B400A4B211 /* SearchViewController.m in Sources */,
 				33FED05C1C0D28DB00A4B211 /* ImagePickTableViewCell.m in Sources */,
 				33DE69A11C01B740009847D8 /* ListBidTableViewCell.m in Sources */,
@@ -1070,10 +1095,8 @@
 				33FED07C1C0D612800A4B211 /* SBarTableViewCell.m in Sources */,
 				74366EF4158AF2D300A17D8A /* PropertyConfigViewController.m in Sources */,
 				74366EFA158B95C800A17D8A /* SubclassConfigViewController.m in Sources */,
-				EABC670A1C827A2F00E6E559 /* InboxViewController.swift in Sources */,
 				339BAB431C2DF787009BBBBB /* ItemCollectionViewCell.m in Sources */,
 				74366F03158B973C00A17D8A /* MyLogInViewController.m in Sources */,
-				EABC670E1C827AC200E6E559 /* InboxViewCell.swift in Sources */,
 				EAD2262A1C6FF91100F23DAF /* KeapAPIBot.m in Sources */,
 				338D26401C3716BD00782065 /* PersonalTableViewCell.m in Sources */,
 				74366F06158B975500A17D8A /* MySignUpViewController.m in Sources */,
@@ -1172,6 +1195,7 @@
 		};
 		74366EBB158AAE1000A17D8A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1BD40BA7B6EB77E750BEE2E /* Pods-Keap.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1205,6 +1229,7 @@
 		};
 		74366EBC158AAE1000A17D8A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F530977D44F565522AB2360 /* Pods-Keap.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
