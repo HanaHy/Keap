@@ -194,6 +194,8 @@
 		C4BBB7C416FD2D73003CA3F7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4BBB7C116FD2D73003CA3F7 /* Default-568h@2x.png */; };
 		C4FD613617286AC800F61563 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD613517286AC800F61563 /* Icon.png */; };
 		C4FD613817286ACD00F61563 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4FD613717286ACD00F61563 /* Icon@2x.png */; };
+		CCB5EA611E6FC9C000AD7A03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB5EA601E6FC9C000AD7A03 /* GoogleService-Info.plist */; };
+		CCCF0FD01E6A6EF500812D84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCCF0FCF1E6A6EF500812D84 /* GoogleService-Info.plist */; };
 		EABC670A1C827A2F00E6E559 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABC67091C827A2F00E6E559 /* InboxViewController.swift */; };
 		EABC670C1C827A9600E6E559 /* ChatTabViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABC670B1C827A9600E6E559 /* ChatTabViewCell.xib */; };
 		EABC670E1C827AC200E6E559 /* InboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABC670D1C827AC200E6E559 /* InboxViewCell.swift */; };
@@ -434,6 +436,8 @@
 		C4BBB7C116FD2D73003CA3F7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C4FD613517286AC800F61563 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		C4FD613717286ACD00F61563 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		CCB5EA601E6FC9C000AD7A03 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCCF0FCF1E6A6EF500812D84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EABC67091C827A2F00E6E559 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		EABC670B1C827A9600E6E559 /* ChatTabViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTabViewCell.xib; sourceTree = "<group>"; };
 		EABC670D1C827AC200E6E559 /* InboxViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewCell.swift; sourceTree = "<group>"; };
@@ -601,6 +605,7 @@
 		74366E97158AAE0F00A17D8A = {
 			isa = PBXGroup;
 			children = (
+				CCB5EA601E6FC9C000AD7A03 /* GoogleService-Info.plist */,
 				33DD99C31C3F809D0089880E /* AssetCatalog.xcassets */,
 				74366EAC158AAE1000A17D8A /* LogInAndSignUpDemo */,
 				741203C415900A3C00820BE9 /* Assets */,
@@ -669,6 +674,7 @@
 		74366EAD158AAE1000A17D8A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CCCF0FCF1E6A6EF500812D84 /* GoogleService-Info.plist */,
 				74366EAE158AAE1000A17D8A /* Keap-Info.plist */,
 				74366EAF158AAE1000A17D8A /* InfoPlist.strings */,
 				74366EB2158AAE1000A17D8A /* main.m */,
@@ -985,6 +991,8 @@
 				EABC67101C827CDD00E6E559 /* Chat.storyboard in Resources */,
 				336A8D1F1C3926840042CF55 /* frame_12.gif in Resources */,
 				747F008115951A58000F601E /* TwitterDown.png in Resources */,
+				CCCF0FD01E6A6EF500812D84 /* GoogleService-Info.plist in Resources */,
+				CCB5EA611E6FC9C000AD7A03 /* GoogleService-Info.plist in Resources */,
 				336F2B6C1BE88763005CC11A /* Logo.png in Resources */,
 				33DC18951C2C9DC3002AD7D6 /* your-listings.png in Resources */,
 				C4BBB7C216FD2D73003CA3F7 /* Default@2x.png in Resources */,

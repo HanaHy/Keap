@@ -8,7 +8,6 @@
 
 #import "MessagesViewController.h"
 #import "MessagesTableViewCell.h"
-#import <LayerKit/LayerKit.h>
 #ifdef __IPHONE_6_0
 # define ALIGN_CENTER NSTextAlignmentCenter
 #else

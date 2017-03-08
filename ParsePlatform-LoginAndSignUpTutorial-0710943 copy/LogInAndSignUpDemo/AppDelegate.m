@@ -8,12 +8,10 @@
 
 #import "AppDelegate.h"
 #import "DemoTableViewController.h"
+@import Firebase;
 //#import <SendBirdSDK/SendBirdSDK.h> // Objective-C
 #import "SubclassConfigViewController.h"
-#import <LayerKit/LayerKit.h>
-@interface AppDelegate () <LYRClientDelegate>
-@property (nonatomic) LYRClient *layerClient;
-@end
+
 
 @implementation AppDelegate
 
@@ -24,16 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    NSURL *appID = [NSURL URLWithString:@"layer:///apps/staging/4584a946-ee29-11e6-b4d1-aa3e02003870"];
-    LYRClient *layerClient = [LYRClient clientWithAppID:appID delegate:self options:nil];
-    [layerClient connectWithCompletion:^(BOOL success, NSError *error) {
-        if (success) {
-            NSLog(@"Successfully connected to Layer!");
-        } else {
-            NSLog(@"Failed connection to Layer with error: %@", error);
-        }
-    }];
-
+    [FIRApp configure];
 
     // ****************************************************************************
     // Fill in with your Parse and Twitter credentials. Don't forget to add your
@@ -56,24 +45,6 @@
     return YES;
 }
 
-- (void)layerClient:(LYRClient *)client didReceiveAuthenticationChallengeWithNonce:(NSString *)nonce
-{
-    NSLog(@"Layer Client did receive an authentication challenge with nonce=%@", nonce);
-    
-    /*
-     * 1. Connect to your backend to generate an identity token using the provided nonce.
-     */
-    //NSString *identityToken =
-    
-    /*
-     * 2. Submit identity token to Layer for validation
-     */
-  //  [layerClient authenticateWithIdentityToken:identityToken completion:^(LYRIdentity *authenticatedUser, NSError *error) {
-    //    if (authenticatedUser) {
-      //      NSLog(@"Authenticated as User: %@", authenticatedUser);
-        //}
-    //}];
-}
 
 /*// Facebook oauth callback
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {

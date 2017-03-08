@@ -2,8 +2,7 @@
  use_frameworks!
 
 target 'Keap' do
-  pod 'SendBirdSDK'
-  pod 'LayerKit'
+  pod 'Firebase/Core'
   pod 'Socket.IO-Client-Swift'
   pod 'AWSS3'
   pod 'AWSCore'
